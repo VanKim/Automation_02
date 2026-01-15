@@ -35,3 +35,8 @@ class ConfigReader:
     def get_implicit():
         """Get the implicit from the configuration"""
         return ConfigReader.load_config()['timeouts']['implicit']
+    
+    @staticmethod
+    def get_api_url():
+        """Get the base URL from the configuration"""
+        return ConfigReader.load_config()['apiurl']
