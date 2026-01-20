@@ -13,7 +13,7 @@ jobs:
       matrix:
         suite:
             - tests/test_login.py
-            - tests/test_api.py
+            - tests/apis/test_api.py
 
 
     steps:
