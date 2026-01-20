@@ -2,8 +2,8 @@ from pages.admin_user_management.admin_user_management_page import AdminPage
 import pytest
 #from apis.hrm_user_api import HRMUserApi
 
-@pytest.mark.smoke
-class TestAdminPage:
+
+class AdminPage:
     def test_select_custom_dropdown(self, admin_page_driver):
         admin_page = AdminPage(admin_page_driver)
         admin_page.select_user_role_dropdown("Admin")
