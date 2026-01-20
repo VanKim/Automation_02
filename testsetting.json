@@ -1,6 +1,6 @@
 {
   "base_url": "https://opensource-demo.orangehrmlive.com",
-  "api_host": "https://jsonplaceholder.typicode.com",
+  "base_api_url": "https://opensource-demo.orangehrmlive.com/web/index.php/api/v2/",
   "credentials": {
     "username": "Admin",
     "password": "admin123"

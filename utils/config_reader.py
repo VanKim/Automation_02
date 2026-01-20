@@ -37,6 +37,6 @@ class ConfigReader:
         return ConfigReader.load_config()['timeouts']['implicit']
     
     @staticmethod
-    def get_api_host():
+    def get_base_api_url():
         """Get the base URL from the configuration"""
-        return ConfigReader.load_config()['api_host']
+        return ConfigReader.load_config()['base_api_url']

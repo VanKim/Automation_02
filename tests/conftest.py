@@ -1,7 +1,12 @@
-import sys
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC
 import pytest
 from selenium import webdriver
+from selenium.webdriver.support.wait import WebDriverWait
+
 from utils.config_reader import ConfigReader
+from pages.login_page import LoginPage
+
 
 
 @pytest.fixture(scope="session")
@@ -11,7 +16,7 @@ def credentials():
         "password": ConfigReader.get_password()
     }
 
-@pytest.fixture
+@pytest.fixture(scope="function")
 def driver():
     # open browser
     driver = webdriver.Chrome()
@@ -22,3 +27,13 @@ def driver():
     driver.implicitly_wait(ConfigReader.get_implicit())
     yield driver
     driver.quit()
+
+@pytest.fixture(scope ="function")
+def login_driver(driver, credentials):
+    login_page = LoginPage(driver)
+    login_page.login_without_keyBoard(credentials["username"], credentials["password"])
+    wait = WebDriverWait(driver, 15)
+    wait.until(EC.url_contains("/dashboard"))
+    return driver
+
+
