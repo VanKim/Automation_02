@@ -4,23 +4,16 @@ from selenium.webdriver.common.by import By
 import csv
 from time import sleep
 from selenium.webdriver.common.keys import Keys
-
+from utils.data_reader import DataReader
 
 class TestSearchWiki:
+    def test_json(self):
+        DataReader.read_data_from_json_file('./testdata/test_json.json')
 
-    def read_data_from_file(file_path):
-        with open(file_path, mode='r') as file:
-            csv_reader = csv.DictReader(file)
-            keywords = []
-            for row in csv_reader:
-                keywords.append(row['keyword'])
-            # print(keywords)
-            return keywords
 
-    testdata = read_data_from_file('./testdata/data.csv')
-
+    testdata = DataReader.read_data_from_csv_file('./testdata/data.csv')
     @pytest.mark.parametrize("keyword", testdata)
-    def test_search_wikipedia1(self, keyword):
+    def search_wikipedia1(self, keyword):
         driver = webdriver.Chrome()
         driver.get('https://vi.wikipedia.org/wiki/Trang_Chính')
         sleep(5)
