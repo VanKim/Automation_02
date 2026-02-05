@@ -40,7 +40,7 @@ jobs:
       #run: pytest ${{matrix.suite}} --maxfail=1 --disable-warnings -q
       run: |
         TEST_NAME=$(basename ${{ matrix.suite }} .py)
-        pytest ${{ matrix.suite }} \
+        pytest ${{matrix.suite}} \
           --maxfail=1 \
           --disable-warnings \
           --html=report/${TEST_NAME}.html \
