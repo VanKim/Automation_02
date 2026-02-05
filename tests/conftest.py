@@ -27,7 +27,6 @@ def driver():
     # input url on browser
     driver.get(base_url)
     driver.maximize_window()
-    driver.implicitly_wait(ConfigReader.get_implicit())
     yield driver
     driver.quit()
 
