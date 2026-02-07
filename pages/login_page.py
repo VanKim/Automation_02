@@ -6,7 +6,7 @@ class LoginPage(BasePage):
     def __init__(self, driver):
         super().__init__(driver)
         self.driver = driver
-        self.__username__ = (By.NAME, "username") #tuple (str, str)
+        self.__username__ = (By.NAME, "username")
         self.__password__ = (By.NAME, "password")
         self.__button__ = (By.CSS_SELECTOR, ".orangehrm-login-button")
         self.__error_message__ = (By.CSS_SELECTOR, ".oxd-alert--error")

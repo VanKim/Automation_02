@@ -1,4 +1,6 @@
-name: Run pytest selenium 
+
+#CI Automation testing
+name: Run pytest selenium
 on:
   push:
     branches: [main]
