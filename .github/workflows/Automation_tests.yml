@@ -4,7 +4,7 @@ name: Run automation
 
 on:
   repository_dispatch:
-      types: [ run-dev-tests, run-staging-tests ]
+      event_type: [ run-dev-tests, run-staging-tests ]
 jobs:
   test:
     runs-on: ubuntu-latest
