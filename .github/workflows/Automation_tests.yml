@@ -1,6 +1,6 @@
 
 #CI Automation testing
-name: Run pytest selenium
+name: Run automation testing
 on:
   push:
   pull_request:
