@@ -1,4 +1,6 @@
-name: Run pytest selenium 
+
+#CI Automation testing
+name: Run pytest selenium
 on:
   push:
     branches: [main]
@@ -14,7 +16,6 @@ jobs:
         suite:
             - tests/test_login.py
             - tests/apis/test_user_api.py
-
 
     steps:
     - name: Checkout source code from github
@@ -38,13 +39,11 @@ jobs:
     - name: Run test
       #run: pytest -m smoke --html=report/report.html --self-contained-html
       run: pytest ${{matrix.suite}} --maxfail=1 --disable-warnings -q
-    - name: Create report html
-      run: pytest --html=report/report.html --self-contained-html
-      
+
     - name: Upload test report
       if: always()
       uses: actions/upload-artifact@v4
-      with: 
-        name: test-report
-        path: report/report.html
+      with:
+        name: test-report -  ${{matrix.suite}}
+        path: report/*.html
           

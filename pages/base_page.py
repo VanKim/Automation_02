@@ -20,11 +20,12 @@ class BasePage:
             EC.presence_of_element_located(locator)
         )
 
-    def send_keys(self, locator, value, timeout=10):
+    def send_keys(self, locator, value, clear, timeout=10):
         element = WebDriverWait(self.driver, timeout).until(
             EC.visibility_of_element_located(locator)
         )
-        element.clear()
+        if clear:
+            element.clear()
         element.send_keys(value)
 
     def click(self, locator):

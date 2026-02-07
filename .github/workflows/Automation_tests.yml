@@ -1,0 +1,45 @@
+
+#CI Automation testing
+name: Run pytest selenium
+on:
+  push:
+  pull_request:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout source code from github
+      uses: actions/checkout@v4
+    - name: Install python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.13'
+
+    - name: Install necessary libraries
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirement.txt
+
+    - name: Set environment testing
+      run: |
+          if [[ "${{ github.event.action }}" == "run-dev-tests" ]]; then
+            echo "base_url=https://opensource-demo.orangehrmlive.com" >> $GITHUB_ENV 
+            echo "base_api_url": "https://jsonplaceholder.typicode.com" >> $GITHUB_ENV
+          elif [[ "${{ github.event.action }}" == "run-staging-tests" ]]; then
+            echo "hello staging"
+          else
+            echo "base_url=http://mock" >> $GITHUB_ENV
+          fi
+
+
+    - name: Run Automation tests
+      run: |
+        if [[ "${{ github.event.action }}" == "run-dev-tests" ]]; then
+            echo "hello dev {{$base_url}}"
+          elif [[ "${{ github.event.action }}" == "run-staging-tests" ]]; then
+            echo "hello staging {{$base_url}}"
+          else
+            echo "mock" 
+          fi 
+

@@ -26,7 +26,7 @@ def driver():
     base_url = ConfigReader.get_base_url()
     # input url on browser
     driver.get(base_url)
-    driver.maximize_window()
+    #driver.maximize_window()
     yield driver
     driver.quit()
 
