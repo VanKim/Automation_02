@@ -3,8 +3,6 @@
 name: Run automation
 
 on:
-  push:
-  pull_request:
   repository_dispatch:
       types: [ run-dev-tests, run-staging-tests ]
 jobs:
@@ -26,22 +24,22 @@ jobs:
 
     - name: Set environment testing
       run: |
-          if [[ "${{ github.event.action }}" == "run-dev-tests" ]]; then
-            echo "base_url=https://opensource-demo.orangehrmlive.com" >> $GITHUB_ENV 
-            echo "base_api_url": "https://jsonplaceholder.typicode.com" >> $GITHUB_ENV
-          elif [[ "${{ github.event.action }}" == "run-staging-tests" ]]; then
+          if [[ "${{github.event.event_type }}" == "run-dev-tests" ]]; then
+            echo "BASE_URL=https://opensource-demo.orangehrmlive.com" >> $GITHUB_ENV 
+            echo "BASE_API_URL: https://jsonplaceholder.typicode.com" >> $GITHUB_ENV
+          elif [[ "${{github.event.event_type}}" == "run-staging-tests" ]]; then
             echo "hello staging"
           else
-            echo "base_url=http://mock" >> $GITHUB_ENV
+            echo "BASE_URL=http://mock" >> $GITHUB_ENV
           fi
 
 
     - name: Run Automation tests
       run: |
-        if [[ "${{ github.event.action }}" == "run-dev-tests" ]]; then
-            echo "hello dev {{$base_url}}"
-          elif [[ "${{ github.event.action }}" == "run-staging-tests" ]]; then
-            echo "hello staging {{$base_url}}"
+        if [[ "${{ github.event.event_type}}" == "run-dev-tests" ]]; then
+            echo "hello dev {{$BASE_URL}}"
+          elif [[ "${{github.event.event_type}}" == "run-staging-tests" ]]; then
+            echo "hello staging {{$BASE_URL}}"
           else
             echo "mock" 
           fi 
