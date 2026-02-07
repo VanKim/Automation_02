@@ -12,16 +12,16 @@ class LoginPage(BasePage):
         self.__error_message__ = (By.CSS_SELECTOR, ".oxd-alert--error")
 
     def input_username_field(self, username):
-        self.send_keys(self.__username__,username) #*self.__userName__ unpack tuple to 2 args
+        self.send_keys(self.__username__,username, clear = True) #*self.__userName__ unpack tuple to 2 args
 
     def input_password_field(self, password):
-        self.send_keys(self.__password__,password)
+        self.send_keys(self.__password__,password, clear = True)
 
     def click_login_button(self):
         self.click(self.__button__)
 
     def press_enter_login_button(self):
-        self.send_keys(self.__button__,Keys.ENTER)
+        self.send_keys(self.__button__,Keys.ENTER, clear = False)
 
     def login_without_keyBoard(self, username, password):
         self.input_username_field(username)
