@@ -4,7 +4,7 @@ name: Run automation
 
 on:
   repository_dispatch:
-      event_type: [ run-dev-tests, run-staging-tests ]
+      types: [ run-dev-tests, run-staging-tests ]
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -38,7 +38,7 @@ jobs:
       run: |
         if [[ "${{ github.event.event_type}}" == "run-dev-tests" ]]; then
             echo "hello dev {{$BASE_URL}}"
-          elif [[ "${{github.event.event_type}}" == "run-staging-tests" ]]; then
+          elif [["${{github.event.event_type}}" == "run-staging-tests" ]]; then
             echo "hello staging {{$BASE_URL}}"
           else
             echo "mock" 
