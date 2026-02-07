@@ -34,7 +34,7 @@ class LoginPage(BasePage):
         self.press_enter_login_button()
 
     def get_error_message(self):
-        return self.driver.find_element(*self.__error_message__).text
+        return self.find_element(self.__error_message__).text
 
 
 
