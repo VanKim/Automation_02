@@ -24,10 +24,10 @@ jobs:
 
     - name: Set environment testing
       run: |
-          if [[ "${{github.event.event_type }}" == "run-dev-tests" ]]; then
+          if [[ "${{ github.event.event_type }}" == "run-dev-tests" ]]; then
             echo "BASE_URL=https://opensource-demo.orangehrmlive.com" >> $GITHUB_ENV 
-            echo "BASE_API_URL: https://jsonplaceholder.typicode.com" >> $GITHUB_ENV
-          elif [[ "${{github.event.event_type}}" == "run-staging-tests" ]]; then
+            echo "BASE_API_URL=https://jsonplaceholder.typicode.com" >> $GITHUB_ENV
+          elif [[ "${{ github.event.event_type}}" == "run-staging-tests" ]]; then
             echo "hello staging"
           else
             echo "BASE_URL=http://mock" >> $GITHUB_ENV
@@ -36,10 +36,10 @@ jobs:
 
     - name: Run Automation tests
       run: |
-        if [[ "${{ github.event.event_type}}" == "run-dev-tests" ]]; then
-            echo "hello dev {{$BASE_URL}}"
-          elif [["${{github.event.event_type}}" == "run-staging-tests" ]]; then
-            echo "hello staging {{$BASE_URL}}"
+        if [[ "${{ github.event.event_type }}" == "run-dev-tests" ]]; then
+            echo "hello dev $BASE_URL"
+          elif [[ "${{ github.event.event_type }}" == "run-staging-tests" ]]; then
+            echo "hello staging $BASE_URL"
           else
             echo "mock" 
           fi 
