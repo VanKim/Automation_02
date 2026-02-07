@@ -1,9 +1,12 @@
 
 #CI Automation testing
-name: Run automation testing
+name: Run automation
+
 on:
   push:
   pull_request:
+  repository_dispatch:
+      types: [ run-dev-tests, run-staging-tests ]
 jobs:
   test:
     runs-on: ubuntu-latest
