@@ -15,7 +15,9 @@ jobs:
         browser:
           - Chrome
           - Firefox
-
+    env:
+      BROWSER: ${{ matrix.browser }}
+      
     steps:
     - name: Debug event
       run: |
@@ -46,8 +48,6 @@ jobs:
           else
             echo "BASE_URL=http://mock" >> $GITHUB_ENV
           fi
-      env:
-        BROWSER: ${{ matrix.browser }}
 
     - name: Run Automation tests
       run: |
