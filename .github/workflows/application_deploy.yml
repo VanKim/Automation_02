@@ -7,7 +7,7 @@ on:
       types: [ run-dev-tests, run-staging-tests ]
 jobs:
   automation_test_functions:
-    uses: ./.github/workflows/automation-test.yml
+    uses: ./.github/workflows/automation_test.yml
     with:
       test_suite: ./tests/test_login.py
       browser: '["Chrome","Firefox"]'
