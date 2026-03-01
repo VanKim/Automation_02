@@ -40,7 +40,7 @@ jobs:
 
     - name: Set environment testing
       run: |
-          if [[ "${{ github.event.event_type }}" == "run-dev-tests" ]]; then
+          if [[ "${{ github.event.action }}" == "run-dev-tests" ]]; then
             echo "BASE_URL=https://opensource-demo.orangehrmlive.com" >> $GITHUB_ENV 
             echo "BASE_API_URL=https://jsonplaceholder.typicode.com" >> $GITHUB_ENV
           elif [[ "${{ github.event.action }}" == "run-staging-tests" ]]; then
