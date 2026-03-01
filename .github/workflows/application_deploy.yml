@@ -17,7 +17,11 @@ jobs:
           - Firefox
 
     steps:
-        
+    - name: Debug event
+      run: |
+        echo "Event name: ${{ github.event_name }}"
+        echo "Event type: ${{ github.event.event_type }}"
+        echo '${{ toJson(github.event) }}'
 
     - name: Checkout source code from github
       uses: actions/checkout@v4
