@@ -1,7 +1,7 @@
 
 #CI Automation testing
 name: Run pytest selenium
-run-name: Automation CI - ${{ GITHUB_EVENT_NAME }}
+run-name: Automation CI
 on:
   push:
     branches: [main]
