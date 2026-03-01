@@ -1,0 +1,59 @@
+
+#CI Automation testing after deploying application to Dev, Staging, Prod...
+name: Reusable Automation Runner
+
+on:
+  workflow_call:
+      inputs:
+        event:
+          required: true
+          type: string
+        test_suite:
+          required: true
+          type: string
+        browser:
+          type: string
+          required: true
+        headless:
+          type: boolean
+          required: true
+jobs:
+  automation_test_functions:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        suite:  ${{ inputs.test_suite }}
+        browser: ${{ fromJson(inputs.browser) }}
+        headless: ${{ inputs.headless }}
+    env:
+      BROWSER: ${{ matrix.browser }}
+      HEADLESS: ${{ matrix.headless }}
+
+    steps:
+    - name: Checkout source code from github
+      uses: actions/checkout@v4
+
+    - name: Install python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.13'
+
+    - name: Install necessary libraries
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirement.txt
+
+    - name: Set environment testing
+      run: |
+          if [[ "${{ inputs.event }}" == "run-dev-tests" ]]; then
+            echo "BASE_URL=https://opensource-demo.orangehrmlive.com" >> $GITHUB_ENV 
+            echo "BASE_API_URL=https://jsonplaceholder.typicode.com" >> $GITHUB_ENV
+          elif [[ "${{ inputs.event }}" == "run-staging-tests" ]]; then
+            echo "Staging"
+          else
+            echo "BASE_URL=http://mock" >> $GITHUB_ENV
+          fi
+
+    - name: Run Automation tests
+      run:
+        pytest ${{matrix.suite}} -s --maxfail=1 --disable-warnings
