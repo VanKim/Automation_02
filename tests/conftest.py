@@ -21,7 +21,7 @@ def credentials():
 def driver():
     options = Options()
     options.add_argument("--headless=new")
-    
+
     if os.getenv("BROWSER"):
         browser = os.getenv("BROWSER")
     else:
