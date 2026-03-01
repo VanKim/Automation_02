@@ -1,6 +1,6 @@
 
 #CI Automation testing after deploying application to Dev, Staging, Prod...
-name: Automation CI after deploying application
+name: Automation test - deploying application
 run-name: Deploy ${{ github.event.action }} | ${{ github.ref_name }} | ${{ github.actor }}
 on:
   repository_dispatch:
@@ -11,7 +11,7 @@ jobs:
     strategy:
       matrix:
         suite:
-          - ./test/test_login.py
+          - ./tests/test_login.py
         browsers:
           - Chrome
           - Firefox
@@ -64,7 +64,7 @@ jobs:
     strategy:
       matrix:
         suite:
-          - ./test/apis
+          - ./tests/apis
     steps:
     - name: Checkout source code from github
       uses: actions/checkout@v4
