@@ -1,17 +1,29 @@
 
-#CI Automation testing
+#CI Automation testing after deploying application to Dev, Staging, Prod...
 name: Run automation
-
+run-name: Automation testing after deploying application successfully - $GITHUB_EVENT_NAME
 on:
   repository_dispatch:
       types: [ run-dev-tests, run-staging-tests ]
 jobs:
-  test:
+  automation_test:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        suite:
+          - ./test/test_login.py
+          - ./test/apis/
+          - ./test/test_search.py
+
+        browsers:
+          - Chrome
+          - Firefox
+          - Safari
 
     steps:
     - name: Checkout source code from github
       uses: actions/checkout@v4
+
     - name: Install python
       uses: actions/setup-python@v5
       with:
@@ -27,20 +39,19 @@ jobs:
           if [[ "${{ github.event.event_type }}" == "run-dev-tests" ]]; then
             echo "BASE_URL=https://opensource-demo.orangehrmlive.com" >> $GITHUB_ENV 
             echo "BASE_API_URL=https://jsonplaceholder.typicode.com" >> $GITHUB_ENV
-          elif [[ "${{ github.event.event_type}}" == "run-staging-tests" ]]; then
+          elif [[ "${{ github.event.event_type }}" == "run-staging-tests" ]]; then
             echo "hello staging"
           else
             echo "BASE_URL=http://mock" >> $GITHUB_ENV
           fi
 
-
     - name: Run Automation tests
       run: |
         if [[ "${{ github.event.event_type }}" == "run-dev-tests" ]]; then
-            echo "hello dev $BASE_URL"
+            pytest ${{matrix.suite}} --maxfail=1 --disable-warnings -q
           elif [[ "${{ github.event.event_type }}" == "run-staging-tests" ]]; then
-            echo "hello staging $BASE_URL"
+            echo "HELLO STAGING: implementing test scripts for STAGING..."
           else
-            echo "mock" 
+            echo "HELLO Mock" 
           fi 
 
