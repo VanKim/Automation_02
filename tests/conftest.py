@@ -7,7 +7,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from utils.config_reader import ConfigReader
 from pages.login_page import LoginPage
 from selenium.webdriver.chrome.options import Options
-
+import os
 
 
 @pytest.fixture(scope="session")
@@ -21,8 +21,25 @@ def credentials():
 def driver():
     options = Options()
     options.add_argument("--headless=new")
+    
+    if os.getenv("BROWSER"):
+        browser = os.getenv("BROWSER")
+    else:
+        browser = "Chrome"
+
+    print(f"Running test on browser: {browser}")
+
     # open browser
-    driver = webdriver.Chrome(options=options)
+    match browser:
+        case 'Chrome':
+            driver = webdriver.Chrome(options=options)
+        case 'Firefox':
+            driver = webdriver.Firefox(options=options)
+        case 'Edge':
+            driver = webdriver.Edge(options=options)
+        case 'Safari':
+            driver = webdriver.Safari(options=options)
+    #access base url
     base_url = ConfigReader.get_base_url()
     # input url on browser
     driver.get(base_url)
