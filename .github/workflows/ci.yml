@@ -1,7 +1,7 @@
 
 #CI Automation testing
-name: Run pytest selenium
-run-name: Automation CI
+name: Automation CI
+run-name: ${{ github.ref_name }} | ${{ github.actor }}
 on:
   push:
     branches: [main]

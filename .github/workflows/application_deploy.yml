@@ -1,7 +1,7 @@
 
 #CI Automation testing after deploying application to Dev, Staging, Prod...
-name: Run automation
-run-name: Automation test after deploying application
+name: Automation CI after deploying application
+run-name: Deploy ${{ github.event.action }} | ${{ github.ref_name }} | ${{ github.actor }}
 on:
   repository_dispatch:
       types: [ run-dev-tests, run-staging-tests ]
