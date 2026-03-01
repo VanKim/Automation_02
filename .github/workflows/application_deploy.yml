@@ -1,7 +1,7 @@
 
 #CI Automation testing after deploying application to Dev, Staging, Prod...
 name: Run automation
-run-name: ${{ github.event.event_type }} after deploying application
+run-name: Automation test after deploying application
 on:
   repository_dispatch:
       types: [ run-dev-tests, run-staging-tests ]
@@ -17,6 +17,8 @@ jobs:
           - Firefox
 
     steps:
+        
+
     - name: Checkout source code from github
       uses: actions/checkout@v4
 
