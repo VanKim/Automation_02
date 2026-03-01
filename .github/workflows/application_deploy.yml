@@ -52,7 +52,7 @@ jobs:
     - name: Run Automation tests
       run: |
         if [[ "${{ github.event.action }}" == "run-dev-tests" ]]; then
-            pytest ${{matrix.suite}} --maxfail=1 --disable-warnings 
+            pytest ${{matrix.suite}} -s --maxfail=1 --disable-warnings 
           elif [[ "${{ github.event.action }}" == "run-staging-tests" ]]; then
             echo "STAGING: implementing test scripts for STAGING..."
           else
