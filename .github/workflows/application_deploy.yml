@@ -12,7 +12,7 @@ jobs:
       matrix:
         suite:
           - ./tests/test_login.py
-        browsers:
+        browser:
           - Chrome
           - Firefox
 
@@ -47,7 +47,7 @@ jobs:
             echo "BASE_URL=http://mock" >> $GITHUB_ENV
           fi
       env:
-        browser: ${{ matrix.browsers }}
+        BROWSER: ${{ matrix.browser }}
 
     - name: Run Automation tests
       run: |
@@ -88,10 +88,11 @@ jobs:
         else
           echo "BASE_URL=http://mock" >> $GITHUB_ENV
         fi
+
     - name: Run Automation API tests
       run: |
         if [[ "${{ github.event.action }}" == "run-dev-tests" ]]; then
-          pytest ${{matrix.suite}} --maxfail=1 --disable-warnings -q
+          pytest ${{matrix.suite}} -s --maxfail=1 --disable-warnings 
         elif [[ "${{ github.event.action }}" == "run-staging-tests" ]]; then
           echo "STAGING: implementing test scripts for STAGING..."
         else

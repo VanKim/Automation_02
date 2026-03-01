@@ -27,7 +27,7 @@ def driver():
     else:
         browser = "Chrome"
 
-    print(f"Running test on browser: {browser}")
+    print(f"[DEBUG] Running test on browser: {browser}")
 
     # open browser
     match browser:
