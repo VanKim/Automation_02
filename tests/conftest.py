@@ -22,37 +22,59 @@ def credentials():
 
 @pytest.fixture(scope="function")
 def driver():
+
     print(f"[DEBUG] Running test on browser: {os.getenv("BROWSER")}")
+    #Receive browser type from application_deploy.yml else default: Chrome browser
+    #Setup headless mode if test script is triggered from application_deploy.yaml else none
+    headless_flag = False
     if os.getenv("BROWSER"):
         browser = os.getenv("BROWSER")
+        headless_flag = True
     else:
         browser = "Chrome"
 
-    print(f"[DEBUG] Running test on browser: {browser}")
-    driver = webdriver
-    # open browser
+    # Open browser
+    driver = None
     match browser:
         case 'Chrome':
-            options = ChromeOptions()
-            options.add_argument("--headless=new")
-            driver = webdriver.Chrome(options=options)
+            if headless_flag:
+                options = ChromeOptions()
+                options.add_argument("--headless=new")
+                driver = webdriver.Chrome(options=options)
+            else:
+                driver = webdriver.Chrome()
         case 'Firefox':
-            options = FirefoxOptions()
-            options.add_argument("--headless=new")
-            driver = webdriver.Firefox(options=options)
+            if headless_flag:
+                options = FirefoxOptions()
+                options.add_argument("--headless=new")
+                driver = webdriver.Firefox(options=options)
+            else:
+                driver = webdriver.Firefox()
         case 'Edge':
-            options = EdgeOptions()
-            options.add_argument("--headless=new")
-            driver = webdriver.Edge(options=options)
+            if headless_flag:
+                options = EdgeOptions()
+                options.add_argument("--headless=new")
+                driver = webdriver.Edge(options=options)
+            else:
+                driver = webdriver.Edge()
         case 'Safari':
-            options = SafariOptions()
-            options.add_argument("--headless=new")
-            driver = webdriver.Safari(options=options)
-    #access base url
-    base_url = ConfigReader.get_base_url()
-    # input url on browser
+            if headless_flag:
+                options = SafariOptions()
+                options.add_argument("--headless=new")
+                driver = webdriver.Safari(options=options)
+            else:
+                driver = webdriver.Safari()
+
+    print(f"[DEBUG] Running test with BASE URL: {os.getenv("BASE_URL")}")
+    #Receive BASE_URL from application_deploy.yml else get from testsetting.json
+    base_url = None
+    if os.getenv("BASE_URL"):
+        base_url = os.getenv("BASE_URL")
+    else:
+        base_url = ConfigReader.get_base_url()
+
+    #input url on browser
     driver.get(base_url)
-    #driver.maximize_window()
     yield driver
     driver.quit()
 
