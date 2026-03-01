@@ -22,6 +22,7 @@ def driver():
     options = Options()
     options.add_argument("--headless=new")
 
+    print(f"[DEBUG] Running test on browser: {os.getenv("BROWSER")}")
     if os.getenv("BROWSER"):
         browser = os.getenv("BROWSER")
     else:
