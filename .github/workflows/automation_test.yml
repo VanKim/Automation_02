@@ -14,20 +14,18 @@ on:
         browser:
           type: string
           required: true
-        headless:
-          type: boolean
-          required: true
+
 jobs:
   automation_test_functions:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        suite:  ${{ fromJson(inputs.test_suite) }}
-        browser: ${{ fromJson(inputs.browser) }}
-        headless: ${{ inputs.headless }}
+        suite:  [ ${{ fromJson(inputs.test_suite) }} ]
+        browser: [ ${{ fromJson(inputs.browser) }} ]
+
     env:
       BROWSER: ${{ matrix.browser }}
-      HEADLESS: ${{ matrix.headless }}
+      HEADLESS: true
 
     steps:
     - name: Checkout source code from github
