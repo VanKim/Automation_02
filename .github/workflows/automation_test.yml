@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        suite:  ${{ inputs.test_suite }}
+        suite:  ${{ fromJson(inputs.test_suite) }}
         browser: ${{ fromJson(inputs.browser) }}
         headless: ${{ inputs.headless }}
     env:
