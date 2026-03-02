@@ -4,7 +4,6 @@ import pytest
 from selenium import webdriver
 from selenium.webdriver.support.wait import WebDriverWait
 
-from utils.browser_factory import open_chrome_browser
 from utils.config_reader import ConfigReader
 from pages.login_page import LoginPage
 import os
@@ -20,11 +19,14 @@ def credentials():
 
 @pytest.fixture(scope="function")
 def driver():
-
     print(f"[DEBUG] Running test on browser: {os.getenv("BROWSER")} & Headless mode: {os.getenv("HEADLESS")}")
+
     # Setup headless mode if test script is triggered from application_deploy.yaml else none
+    options_list = []
+    headless_flag = False
     if os.getenv("HEADLESS"):
         headless_flag = True
+        options_list.append('--headless=new')
     else:
         headless_flag = False
 
@@ -34,19 +36,17 @@ def driver():
     else:
         browser = "Chrome"
 
-
     # Open browser
     driver = None
-    options_list = None
     match browser:
         case 'Chrome':
-            driver = open_chrome_browser(browser, options_list, headless_flag)
+            driver = open_chrome_browser(driver, options_list)
         case 'Firefox':
-            driver = open_firefox_browser(browser, options_list, headless_flag)
+            driver = open_firefox_browser(driver, options_list)
         case 'Edge':
-            driver = open_edge_browser(browser, options_list, headless_flag)
+            driver = open_edge_browser(driver, options_list)
         case 'Safari':
-            driver = open_safari_browser(browser, options_list, headless_flag)
+            driver = open_safari_browser(driver, options_list)
 
     # Get cookies
 
