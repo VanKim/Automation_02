@@ -15,7 +15,7 @@ jobs:
       fail-fast: false
       matrix:
         suite:
-            - tests/test_login.py
+            - tests/login_page
             - tests/apis
 
     steps:
