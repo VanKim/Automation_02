@@ -1,7 +1,7 @@
 
 #CI Automation testing
 name: Automation CI
-run-name: ${{ github.ref_name }} | ${{ github.actor }} | ${{ github.action }}
+run-name: ${{ github.ref_name }} | ${{ github.actor }} | ${{ github.event }}
 on:
   push:
     branches: [main]

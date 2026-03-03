@@ -12,7 +12,7 @@ class AdminPage:
     def test_redirect_adding_form(self, admin_page_driver):
         admin_page = AdminPage(admin_page_driver)
         admin_page.click_on_add_button()
-        assert admin_page_driver.current_url == 'https://opensource-demo.orangehrmlive.com/web/index.php/admin/saveSystemUser'
+        assert 'admin/saveSystemUser' in admin_page_driver.current_url
     
     def test_searching_with_user_role(self, admin_page_driver):
         admin_page = AdminPage(admin_page_driver)

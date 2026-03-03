@@ -16,6 +16,7 @@ class TestLoginPage:
         dashboard_page = DashboardPage(driver)
         assert dashboard_page.get_header() == "Dashboard"
 
+
     def test_login_failure_when_invalid_username(self, driver):
         password="admin123"
         username="admin123"

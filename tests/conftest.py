@@ -20,19 +20,18 @@ def credentials():
 @pytest.fixture(scope="function")
 def driver():
     options_list = []
-    headless_flag = False
+    headless_flag = os.getenv("HEADLESS")
 
     # Setup headless mode if test script is triggered from application_deploy.yaml else none
-    if os.getenv("HEADLESS") == "True":
+    if not headless_flag:
+        headless_flag = False
+    else:
         headless_flag = True
         options_list.append('--headless=new')
-    else:
-        headless_flag = False
 
     # Receive browser type from application_deploy.yml else default: Chrome browser
-    if os.getenv("BROWSER") is not None:
-        browser = os.getenv("BROWSER")
-    else:
+    browser = os.getenv("BROWSER")
+    if browser is None:
         browser = "Chrome"
 
     # Open browser
@@ -52,10 +51,8 @@ def driver():
 
     print(f"[DEBUG] Running test with BASE URL: {os.getenv("BASE_URL")}")
     # Receive BASE_URL from application_deploy.yml else get from testsetting.json
-    base_url = None
-    if os.getenv("BASE_URL"):
-        base_url = os.getenv("BASE_URL")
-    else:
+    base_url = os.getenv("BASE_URL")
+    if base_url is None:
         base_url = ConfigReader.get_base_url()
 
     # Access base_url on browser

@@ -1,3 +1,5 @@
+import pytest_check
+
 from apis.user_account_apis import UserAccountApis
 import pytest
 import pytest_check as check
