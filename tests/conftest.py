@@ -19,19 +19,18 @@ def credentials():
 
 @pytest.fixture(scope="function")
 def driver():
-    print(f"[DEBUG] Running test on browser: {os.getenv("BROWSER")} & Headless mode: {os.getenv("HEADLESS")}")
     options_list = []
     headless_flag = False
 
     # Setup headless mode if test script is triggered from application_deploy.yaml else none
-    if os.getenv("HEADLESS"):
+    if os.getenv("HEADLESS") == "True":
         headless_flag = True
         options_list.append('--headless=new')
     else:
         headless_flag = False
 
     # Receive browser type from application_deploy.yml else default: Chrome browser
-    if os.getenv("BROWSER"):
+    if os.getenv("BROWSER") is not None:
         browser = os.getenv("BROWSER")
     else:
         browser = "Chrome"
