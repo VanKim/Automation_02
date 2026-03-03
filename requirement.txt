@@ -3,3 +3,6 @@ pytest
 pytest-html
 pytest_check
 requests
+re
+os
+jsonschema

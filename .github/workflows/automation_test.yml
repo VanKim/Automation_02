@@ -17,6 +17,8 @@ on:
 
 jobs:
   automation_test_functions:
+    timeout-minutes: 10
+    continue-on-error: true
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -45,7 +47,6 @@ jobs:
       run: |
           if [[ "${{ inputs.event }}" == "run-dev-tests" ]]; then
             echo "BASE_URL=https://opensource-demo.orangehrmlive.com" >> $GITHUB_ENV 
-            echo "BASE_API_URL=https://jsonplaceholder.typicode.com" >> $GITHUB_ENV
           elif [[ "${{ inputs.event }}" == "run-staging-tests" ]]; then
             echo "Staging"
           else

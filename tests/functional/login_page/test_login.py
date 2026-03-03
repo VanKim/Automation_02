@@ -4,8 +4,6 @@ import pytest
 
 @pytest.mark.smoke
 class TestLoginPage:
-
-
     def test_login_successfully_valid_account_with_click_button(self, driver, credentials):
         login_page = LoginPage(driver)
         login_page.login_without_keyBoard(credentials["username"], credentials["password"])

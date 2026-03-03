@@ -1,0 +1,93 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["data", "meta", "rels"],
+  "properties": {
+    "data": {
+      "type": "object",
+      "required": [
+        "id",
+        "userName",
+        "deleted",
+        "status",
+        "employee",
+        "userRole"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "userName": {
+          "type": "string",
+          "minLength": 1
+        },
+        "deleted": {
+          "type": "boolean"
+        },
+        "status": {
+          "type": "boolean"
+        },
+        "employee": {
+          "type": "object",
+          "required": [
+            "empNumber",
+            "employeeId",
+            "firstName",
+            "middleName",
+            "lastName",
+            "terminationId"
+          ],
+          "properties": {
+            "empNumber": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "employeeId": {
+              "type": "string",
+              "minLength": 1
+            },
+            "firstName": {
+              "type": "string"
+            },
+            "middleName": {
+              "type": "string"
+            },
+            "lastName": {
+              "type": "string"
+            },
+            "terminationId": {
+              "type": ["integer", "null"]
+            }
+          },
+          "additionalProperties": false
+        },
+        "userRole": {
+          "type": "object",
+          "required": ["id", "name", "displayName"],
+          "properties": {
+            "id": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "name": {
+              "type": "string"
+            },
+            "displayName": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "meta": {
+      "type": "array"
+    },
+    "rels": {
+      "type": "array"
+    }
+  },
+  "additionalProperties": false
+}

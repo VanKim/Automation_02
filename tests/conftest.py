@@ -20,10 +20,10 @@ def credentials():
 @pytest.fixture(scope="function")
 def driver():
     print(f"[DEBUG] Running test on browser: {os.getenv("BROWSER")} & Headless mode: {os.getenv("HEADLESS")}")
-
-    # Setup headless mode if test script is triggered from application_deploy.yaml else none
     options_list = []
     headless_flag = False
+
+    # Setup headless mode if test script is triggered from application_deploy.yaml else none
     if os.getenv("HEADLESS"):
         headless_flag = True
         options_list.append('--headless=new')
@@ -50,6 +50,7 @@ def driver():
 
     # Get cookies
 
+
     print(f"[DEBUG] Running test with BASE URL: {os.getenv("BASE_URL")}")
     # Receive BASE_URL from application_deploy.yml else get from testsetting.json
     base_url = None
@@ -58,9 +59,10 @@ def driver():
     else:
         base_url = ConfigReader.get_base_url()
 
-    # Input url on browser
+    # Access base_url on browser
     driver.get(base_url)
     yield driver
+    # Close & delete Profile browser
     driver.quit()
 
 @pytest.fixture(scope ="function")

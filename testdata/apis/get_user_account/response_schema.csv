@@ -1,0 +1,83 @@
+{
+  "type": "object",
+  "required": ["data", "meta", "rels"],
+  "properties": {
+    "data": {
+      "type": "object",
+      "required": [
+        "id",
+        "userName",
+        "deleted",
+        "status",
+        "employee",
+        "userRole"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "userName": {
+          "type": "string"
+        },
+        "deleted": {
+          "type": "boolean"
+        },
+        "status": {
+          "type": "boolean"
+        },
+        "employee": {
+          "type": "object",
+          "required": [
+            "empNumber",
+            "employeeId",
+            "firstName",
+            "middleName",
+            "lastName",
+            "terminationId"
+          ],
+          "properties": {
+            "empNumber": {
+              "type": "integer"
+            },
+            "employeeId": {
+              "type": "string"
+            },
+            "firstName": {
+              "type": "string"
+            },
+            "middleName": {
+              "type": "string"
+            },
+            "lastName": {
+              "type": "string"
+            },
+            "terminationId": {
+              "type": ["null", "integer"]
+            }
+          }
+        },
+        "userRole": {
+          "type": "object",
+          "required": ["id", "name", "displayName"],
+          "properties": {
+            "id": {
+              "type": "integer"
+            },
+            "name": {
+              "type": "string"
+            },
+            "displayName": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "meta": {
+      "type": "array"
+    },
+    "rels": {
+      "type": "array"
+    }
+  }
+}

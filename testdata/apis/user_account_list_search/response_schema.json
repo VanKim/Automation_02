@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["data", "meta", "rels"],
+  "additionalProperties": false,
+  "properties": {
+    "data": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "userName",
+          "deleted",
+          "status",
+          "employee",
+          "userRole"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "integer" },
+          "userName": { "type": "string" },
+          "deleted": { "type": "boolean" },
+          "status": { "type": "boolean" },
+          "employee": {
+            "type": "object",
+            "required": [
+              "empNumber",
+              "employeeId",
+              "firstName",
+              "middleName",
+              "lastName",
+              "terminationId"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "empNumber": { "type": "integer" },
+              "employeeId": { "type": "string" },
+              "firstName": { "type": "string" },
+              "middleName": { "type": "string" },
+              "lastName": { "type": "string" },
+              "terminationId": {
+                "type": ["integer", "null"]
+              }
+            }
+          },
+          "userRole": {
+            "type": "object",
+            "required": ["id", "name", "displayName"],
+            "additionalProperties": false,
+            "properties": {
+              "id": { "type": "integer" },
+              "name": { "type": "string" },
+              "displayName": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    "meta": {
+      "type": "object",
+      "required": ["total"],
+      "additionalProperties": false,
+      "properties": {
+        "total": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "rels": {
+      "type": "array"
+    }
+  }
+}

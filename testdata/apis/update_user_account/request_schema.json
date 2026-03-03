@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "changePassword",
+    "empNumber",
+    "password",
+    "status",
+    "userRoleId",
+    "username"
+  ],
+  "properties": {
+    "changePassword": {
+      "type": "boolean"
+    },
+    "empNumber": {
+      "type": "integer"
+    },
+    "password": {
+      "type": "string"
+    },
+    "status": {
+      "type": "boolean"
+    },
+    "userRoleId": {
+      "type": "integer"
+    },
+    "username": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": false
+}

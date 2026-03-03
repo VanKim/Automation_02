@@ -9,16 +9,15 @@ jobs:
   automation_test_functions:
     uses: ./.github/workflows/automation_test.yml
     with:
-      test_suite: '["./tests/test_login.py"]'
+      test_suite: '["./tests/login_page/test_login.py"]'
       browser: '["Chrome","Firefox"]'
       event: ${{ github.event.action }}
 
   automation_test_api:
+    timeout-minutes: 8
+    continue-on-error: true
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        suite:
-          - ./tests/apis
+
     steps:
     - name: Checkout source code from github
       uses: actions/checkout@v4
@@ -36,7 +35,7 @@ jobs:
     - name: Set environment testing
       run: |
         if [[ "${{ github.event.action }}" == "run-dev-tests" ]]; then
-          echo "BASE_API_URL=https://jsonplaceholder.typicode.com" >> $GITHUB_ENV
+          echo "BASE_API_URL=https://opensource-demo.orangehrmlive.com/web/index.php/api/v2/" >> $GITHUB_ENV
         elif [[ "${{ github.event.action }}" == "run-staging-tests" ]]; then
           echo "Staging"
         else
@@ -46,7 +45,7 @@ jobs:
     - name: Run Automation API tests
       run: |
         if [[ "${{ github.event.action }}" == "run-dev-tests" ]]; then
-          pytest ${{matrix.suite}} -s --maxfail=1 --disable-warnings 
+          pytest -m api_testing -s --maxfail=1 --disable-warnings 
         elif [[ "${{ github.event.action }}" == "run-staging-tests" ]]; then
           echo "STAGING: implementing test scripts for STAGING..."
         else

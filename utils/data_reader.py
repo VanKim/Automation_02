@@ -10,10 +10,10 @@ class DataReader:
             keywords = []
             for row in csv_reader:
                 keywords.append(row['keyword'])
-            # print(keywords)
             return keywords
+
     @staticmethod
     def read_data_from_json_file(file_path):
         with open(file_path, mode='r') as file:
             json_reader = json.load(file)
-            print(json_reader)
+        return json_reader

@@ -1,7 +1,7 @@
 
 #CI Automation testing
 name: Automation CI
-run-name: ${{ github.ref_name }} | ${{ github.actor }}
+run-name: ${{ github.ref_name }} | ${{ github.actor }} | ${{ github.event.action }}
 on:
   push:
     branches: [main]
@@ -16,7 +16,7 @@ jobs:
       matrix:
         suite:
             - tests/test_login.py
-            - tests/apis/test_user_api.py
+            - tests/apis
 
     steps:
     - name: Checkout source code from github
@@ -38,13 +38,12 @@ jobs:
       run: mkdir -p report
 
     - name: Run test
-      #run: pytest -m smoke --html=report/report.html --self-contained-html
-      run: pytest ${{matrix.suite}} --maxfail=1 --disable-warnings -q
+      run: pytest -s ${{matrix.suite}} --html=report/report.html --maxfail=1 --self-contained-html --disable-warnings
 
     - name: Upload test report
       if: always()
       uses: actions/upload-artifact@v4
       with:
-        name: test-report -  ${{matrix.suite}}
+        name: test-report - ${{matrix.suite}}
         path: report/*.html
           
