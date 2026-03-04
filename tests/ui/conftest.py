@@ -21,7 +21,6 @@ def credentials():
 def driver():
     # Setup options for headless mode if test script is triggered from application_deploy.yaml else none
     headless_flag = os.getenv("HEADLESS")
-    print(f"{headless_flag}\n\n\n")
     if headless_flag is None:
         headless_flag = False
 
