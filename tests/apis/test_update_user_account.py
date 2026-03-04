@@ -45,7 +45,7 @@ class TestUpdateUserAccountApi:
         check.equal(response["data"]["userName"], payload["username"])
         check.equal(response["data"]["status"], payload["status"])
         check.equal(response["data"]["employee"]["empNumber"], payload["empNumber"])
-        check.equal(response["data"]["userRole"]["userRoleId"], payload["id"])
+        check.equal(response["data"]["userRole"]["id"], payload["userRoleId"])
 
     def test_update_user_account_change_password_success(self):
         user_id = 54
@@ -66,7 +66,7 @@ class TestUpdateUserAccountApi:
         check.equal(response["data"]["userName"], payload["username"])
         check.equal(response["data"]["status"], payload["status"])
         check.equal(response["data"]["employee"]["empNumber"], payload["empNumber"])
-        check.equal(response["data"]["userRole"]["userRoleId"], payload["id"])
+        check.equal(response["data"]["userRole"]["id"], payload["userRoleId"])
 
     def test_update_user_account_invalid_format_data(self):
         user_id = 54
