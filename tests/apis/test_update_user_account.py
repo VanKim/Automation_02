@@ -42,7 +42,7 @@ class TestUpdateUserAccountApi:
         response = response.json()
         # Verify comparing response with payload
         check.equal(response["data"]["id"], user_id)
-        check.equal(response["data"]["username"], payload["username"])
+        check.equal(response["data"]["userName"], payload["username"])
         check.equal(response["data"]["status"], payload["status"])
         check.equal(response["data"]["changePassword"], payload["changePassword"])
         check.equal(response["data"]["empNumber"], payload["empNumber"])
