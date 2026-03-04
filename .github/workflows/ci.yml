@@ -18,7 +18,7 @@ jobs:
     env:
       BROWSER: ${{ matrix.browser }}
       HEADLESS: true
-      NAME:  login_page_${{ matrix.browser }}"
+      NAME:  login_page_${{ matrix.browser }}
 
     steps:
     - name: Checkout source code from github
