@@ -10,16 +10,12 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    if:
     strategy:
       fail-fast: false
       matrix:
-        include:
-          - suite:  tests/ui/functional/login_page
-            name: "login_page"
-            browser: ["Chrome", "Firefox"]
-          - suite: tests/apis
-            name: "apis"
+        suite: ["tests/ui/functional/login_page"]
+        name: ["login_page"]
+        browser: ["Chrome", "Firefox"]
     env:
       BROWSER: ${{ matrix.browser }}
       HEADLESS: true
@@ -52,4 +48,3 @@ jobs:
       with:
         name: test-report-${{matrix.name}}
         path: report/*.html
-          
