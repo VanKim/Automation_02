@@ -1,5 +1,3 @@
-import pytest_check
-
 from apis.user_account_apis import UserAccountApis
 import pytest
 import pytest_check as check
@@ -10,7 +8,7 @@ import json
 @pytest.mark.api_testing
 class TestUpdateUserAccountApi:
 
-    def hello_update_user_account_schema_validation(self):
+    def test_update_user_account_schema_validation(self):
         request_schema = DataReader.read_data_from_json_file(
             './testdata/apis/update_user_account/request_schema.json')
         response_schema = DataReader.read_data_from_json_file(
@@ -29,7 +27,7 @@ class TestUpdateUserAccountApi:
         validate(instance=json.loads(response.request.body.decode('utf-8')), schema=request_schema)
         validate(instance=response.json(), schema=response_schema)
 
-    def hello_update_user_account_successfully(self):
+    def test_update_user_account_successfully(self):
         user_id = 54
         payload={
                 "changePassword": False,
@@ -51,7 +49,7 @@ class TestUpdateUserAccountApi:
         check.equal(response["data"]["password"], payload["password"])
         check.equal(response["data"]["userRole"]["userRoleId"], payload["id"])
 
-    def hello_update_user_account_invalid_format_data(self):
+    def test_update_user_account_invalid_format_data(self):
         user_id = 54
         payload = {
             "changePassword": "false",
