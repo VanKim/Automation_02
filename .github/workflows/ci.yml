@@ -8,7 +8,7 @@ on:
   pull_request:
     branches: [main]
 jobs:
-  test:
+  UI_test:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -48,3 +48,41 @@ jobs:
       with:
         name: test-report-${{env.NAME}}
         path: report/*.html
+
+  API_test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        suite: ["tests/apis" ]
+    env:
+      NAME: apis
+
+    steps:
+      - name: Checkout source code from github
+        uses: actions/checkout@v4
+      - name: Install python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: Install necessary libraries
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirement.txt
+
+      - name: Install Chrome library
+        uses: browser-actions/setup-chrome@v1
+
+      - name: Create test report folder
+        run: mkdir -p report
+
+      - name: Run test
+        run: pytest -s ${{matrix.suite}} --html=report/report_${{env.NAME}}.html --maxfail=1 --self-contained-html --disable-warnings
+
+      - name: Upload test report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-report-${{env.NAME}}
+          path: report/*.html
