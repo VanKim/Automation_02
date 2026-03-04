@@ -21,10 +21,9 @@ def credentials():
 def driver():
     # Setup options for headless mode if test script is triggered from application_deploy.yaml else none
     headless_flag = os.getenv("HEADLESS")
-    if headless_flag is not True or headless_flag is None:
+    print(f"{headless_flag}\n\n\n")
+    if headless_flag is None:
         headless_flag = False
-    else:
-        headless_flag = True
 
     # Receive browser type from application_deploy.yml else default: Chrome browser
     browser = os.getenv("BROWSER")
