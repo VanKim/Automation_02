@@ -40,7 +40,7 @@ jobs:
       run: mkdir -p report
 
     - name: Run test
-      run: pytest -s ${{matrix.suite}} --html=report/report_${{ matrix.include.name}}.html --maxfail=1 --self-contained-html --disable-warnings
+      run: pytest -s ${{matrix.include.suite}} --html=report/report_${{ matrix.include.name}}.html --maxfail=1 --self-contained-html --disable-warnings
 
     - name: Upload test report
       if: always()
