@@ -17,8 +17,12 @@ jobs:
         include:
           - suite:  tests/ui/functional/login_page
             name: "login_page"
+            browser: ["Chrome", "Firefox"]
           - suite: tests/apis
             name: "apis"
+    env:
+      BROWSER: ${{ matrix.browser }}
+      HEADLESS: true
 
     steps:
     - name: Checkout source code from github
