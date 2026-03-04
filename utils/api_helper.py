@@ -10,9 +10,8 @@ class ApiHelper:
 
     @staticmethod
     def base_api_url():
-        if os.getenv("BASE_API_URL"):
-            base_api_url = os.getenv("BASE_API_URL")
-        else:
+        base_api_url = os.getenv("BASE_API_URL")
+        if base_api_url is None:
             base_api_url = ConfigReader.get_base_api_url()
         return base_api_url
 
