@@ -10,14 +10,15 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    
+    if:
     strategy:
       fail-fast: false
       matrix:
-        suite:
-            - tests/ui/functional/login_page
-            - tests/apis
-
+        include:
+          - suite:  tests/ui/functional/login_page
+            name: "login_page"
+          - suite: tests/apis
+            name: "apis"
 
     steps:
     - name: Checkout source code from github
@@ -39,12 +40,12 @@ jobs:
       run: mkdir -p report
 
     - name: Run test
-      run: pytest -s ${{matrix.suite}} --html=report/report.html --maxfail=1 --self-contained-html --disable-warnings
+      run: pytest -s ${{matrix.suite}} --html=report/report_${{ matrix.include.name}}.html --maxfail=1 --self-contained-html --disable-warnings
 
     - name: Upload test report
       if: always()
       uses: actions/upload-artifact@v4
       with:
-        name: test-report
+        name: test-report-${{ matrix.include.name}}
         path: report/*.html
           
