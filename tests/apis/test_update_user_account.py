@@ -44,7 +44,7 @@ class TestUpdateUserAccountApi:
         check.equal(response["data"]["id"], user_id)
         check.equal(response["data"]["userName"], payload["username"])
         check.equal(response["data"]["status"], payload["status"])
-        check.equal(response["data"]["empNumber"], payload["empNumber"])
+        check.equal(response["data"]["employee"]["empNumber"], payload["empNumber"])
         check.equal(response["data"]["userRole"]["userRoleId"], payload["id"])
 
     def test_update_user_account_change_password_success(self):
