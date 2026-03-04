@@ -20,9 +20,8 @@ def credentials():
 @pytest.fixture(scope="function")
 def driver():
     options_list = []
-    headless_flag = os.getenv("HEADLESS")
-
     # Setup headless mode if test script is triggered from application_deploy.yaml else none
+    headless_flag = os.getenv("HEADLESS")
     if not headless_flag:
         headless_flag = False
     else:
