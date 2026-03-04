@@ -1,7 +1,7 @@
 
 #CI Automation testing
 name: Automation CI
-run-name: ${{ github.ref_name }} | ${{ github.actor }} | ${{ github.event }}
+run-name: ${{ github.ref_name }} | ${{ github.actor }}
 on:
   push:
     branches: [main]
@@ -15,7 +15,7 @@ jobs:
       fail-fast: false
       matrix:
         suite:
-            - tests/functional/login_page
+            - tests/ui/functional/login_page
             - tests/apis
 
     steps:

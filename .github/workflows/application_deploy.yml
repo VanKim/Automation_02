@@ -9,7 +9,7 @@ jobs:
   automation_test_functions:
     uses: ./.github/workflows/automation_test.yml
     with:
-      test_suite: '["./tests/login_page/test_login.py"]'
+      test_suite: '["tests/ui/functional/login_page"]'
       browser: '["Chrome","Firefox"]'
       event: ${{ github.event.action }}
 
