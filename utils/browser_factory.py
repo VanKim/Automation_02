@@ -10,8 +10,10 @@ import os
 def config_chrome_options(options_list):
     options = ChromeOptions()
     for option in options_list:
-        options.add_argument(option)
         print(f'\n\n OPTIONS: {option}\n\n')
+        options.add_argument(option)
+        options.add_argument(option)
+        print(f'\n\n OPTIONS: {options}\n\n')
     return options
 
 def config_firefox_options(options_list):
