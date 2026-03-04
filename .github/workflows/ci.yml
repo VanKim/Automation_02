@@ -40,12 +40,12 @@ jobs:
       run: mkdir -p report
 
     - name: Run test
-      run: pytest -s ${{matrix.suite}} --html=report/report_${{ matrix.name}}.html --maxfail=1 --self-contained-html --disable-warnings
+      run: pytest -s ${{matrix.suite}} --html=report/report_${{matrix.name}}.html --maxfail=1 --self-contained-html --disable-warnings
 
     - name: Upload test report
       if: always()
       uses: actions/upload-artifact@v4
       with:
-        name: test-report-${{ matrix.name}}
+        name: test-report-${{matrix.name}}
         path: report/*.html
           

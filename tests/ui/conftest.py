@@ -19,31 +19,28 @@ def credentials():
 
 @pytest.fixture(scope="function")
 def driver():
-    options_list = []
-    # Setup headless mode if test script is triggered from application_deploy.yaml else none
+    # Setup options for headless mode if test script is triggered from application_deploy.yaml else none
     headless_flag = os.getenv("HEADLESS")
-    if not headless_flag:
+    if headless_flag is not True or headless_flag is None:
         headless_flag = False
     else:
         headless_flag = True
-        options_list.append('--headless=new')
 
     # Receive browser type from application_deploy.yml else default: Chrome browser
     browser = os.getenv("BROWSER")
     if browser is None:
         browser = "Chrome"
-
     # Open browser
     driver = None
     match browser:
         case 'Chrome':
-            driver = open_chrome_browser(driver, options_list)
+            driver = open_chrome_browser(driver, headless_flag)
         case 'Firefox':
-            driver = open_firefox_browser(driver, options_list)
+            driver = open_firefox_browser(driver, headless_flag)
         case 'Edge':
-            driver = open_edge_browser(driver, options_list)
+            driver = open_edge_browser(driver, headless_flag)
         case 'Safari':
-            driver = open_safari_browser(driver, options_list)
+            driver = open_safari_browser(driver, headless_flag)
 
     # Get cookies
 

@@ -7,51 +7,59 @@ from selenium.webdriver.safari.options import Options as SafariOptions
 import os
 
 # Configuration Browser Options
-def config_chrome_options(options_list):
+def config_chrome_options(headless_flag):
     options = ChromeOptions()
-    for option in options_list:
-        print(f'\n\n OPTIONS: {option}\n\n')
-        options.add_argument(option)
-        options.add_argument(option)
-        print(f'\n\n OPTIONS: {options}\n\n')
+    if headless_flag:
+        options.add_argument('--headless=new')
+    else:
+        options.add_argument('--start-maximized')
+        options.add_argument('--disable-popup-blocking')
+        options.add_argument('--disable-extensions')
     return options
 
-def config_firefox_options(options_list):
+def config_firefox_options(headless_flag):
     options = FirefoxOptions()
-    for option in options_list:
-        options.add_argument(option)
+    if headless_flag:
+        options.add_argument('--headless')
+    else:
+        options.add_argument('--window-size=1920,1080')
+        options.set_preference("dom.disable_open_during_load", False)
+        options.profile.set_preference("extensions.enabledScopes", 0)
+        options.profile.set_preference("xpinstall.signatures.required", False)
     return options
 
-def config_edge_options(options_list):
+def config_edge_options(headless_flag):
     options = EdgeOptions()
-    for option in options_list:
-        options.add_argument(option)
+    if headless_flag:
+        options.add_argument('--headless=new')
+    else:
+        options.add_argument('--start-maximized')
+        options.add_argument('--disable-popup-blocking')
+        options.add_argument('--disable-extensions')
     return options
 
-def config_safari_options(options_list):
+def config_safari_options(headless_flag):
     options = SafariOptions()
-    for option in options_list:
-        options.add_argument(option)
     return options
 
 # Open browser
-def open_chrome_browser(driver, options_list):
-    options = config_chrome_options(options_list)
+def open_chrome_browser(driver, headless_flag):
+    options = config_chrome_options(headless_flag)
     driver = webdriver.Chrome(options=options)
     return driver
 
-def open_firefox_browser(driver, options_list):
-    options = config_firefox_options(options_list)
+def open_firefox_browser(driver, headless_flag):
+    options = config_firefox_options(headless_flag)
     driver = webdriver.Firefox(options=options)
     return driver
 
-def open_edge_browser(driver, options_list):
-    options = config_edge_options(options_list)
+def open_edge_browser(driver, headless_flag):
+    options = config_edge_options(headless_flag)
     driver = webdriver.Edge(options=options)
     return driver
 
-def open_safari_browser(driver, options_list):
-    options = config_safari_options(options_list)
+def open_safari_browser(driver, headless_flag):
+    options = config_safari_options(headless_flag)
     driver = webdriver.Safari(options=options)
     return driver
 
