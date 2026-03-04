@@ -72,7 +72,7 @@ jobs:
         run: mkdir -p report
 
       - name: Run test
-        run: pytest -s ${{matrix.suite}} --html=report/report_${{env.NAME}}.html --maxfail=1 --self-contained-html --disable-warnings
+        run: pytest -s ${{matrix.suite}} --html=report/report_${{env.NAME}}.html --self-contained-html --disable-warnings
 
       - name: Upload test report
         if: always()
