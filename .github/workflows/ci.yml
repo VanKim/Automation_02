@@ -18,6 +18,7 @@ jobs:
             - tests/ui/functional/login_page
             - tests/apis
 
+
     steps:
     - name: Checkout source code from github
       uses: actions/checkout@v4
@@ -44,6 +45,6 @@ jobs:
       if: always()
       uses: actions/upload-artifact@v4
       with:
-        name: test-report - ${{matrix.suite}}
+        name: test-report
         path: report/*.html
           

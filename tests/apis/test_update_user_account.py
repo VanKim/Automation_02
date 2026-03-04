@@ -60,7 +60,6 @@ class TestUpdateUserAccountApi:
         response = UserAccountApis.update_user_account(payload, user_id)
         assert response.status_code == 200
         response = response.json()
-        print(response)
         # Verify comparing response with payload
         check.equal(response["data"]["id"], user_id)
         check.equal(response["data"]["userName"], payload["username"])
