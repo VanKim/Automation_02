@@ -14,11 +14,11 @@ jobs:
       fail-fast: false
       matrix:
         suite: ["tests/ui/functional/login_page"]
-        name: ["login_page"]
         browser: ["Chrome", "Firefox"]
     env:
       BROWSER: ${{ matrix.browser }}
       HEADLESS: true
+      NAME:  "login_page"_${{ matrix.browser }}
 
     steps:
     - name: Checkout source code from github
@@ -40,11 +40,11 @@ jobs:
       run: mkdir -p report
 
     - name: Run test
-      run: pytest -s ${{matrix.suite}} --html=report/report_${{matrix.name}}.html --maxfail=1 --self-contained-html --disable-warnings
+      run: pytest -s ${{matrix.suite}} --html=report/report_${{env.NAME}}.html --maxfail=1 --self-contained-html --disable-warnings
 
     - name: Upload test report
       if: always()
       uses: actions/upload-artifact@v4
       with:
-        name: test-report-${{matrix.name}}
+        name: test-report-${{env.NAME}}
         path: report/*.html
