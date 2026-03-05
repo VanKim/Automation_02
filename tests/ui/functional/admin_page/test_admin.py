@@ -1,25 +1,43 @@
 from pages.admin_user_management.admin_user_management_page import AdminPage
 import pytest
-#from apis.hrm_user_api import HRMUserApi
+from time import sleep
+import pytest_check as check
+
+class TestAdminPage:
+
+    def test_user_account_table(self, admin_page_driver):
+        admin_page = AdminPage(admin_page_driver)
+        admin_page.get_response_user_account_list()
+        sleep(3)
+
+    def aest_search_user_account(self, admin_page_driver):
+        data = {
+            "username": "Admin",
+            "userRole": "Admin",
+            "employeeName": "a",
+            "status": "Enabled"
+        }
+        admin_page = AdminPage(admin_page_driver)
+        admin_page.search_user_account(data["username"], data["userRole"], data["employeeName"], data["status"])
+        sleep(3)
 
 
-class AdminPage:
-    def test_select_custom_dropdown(self, admin_page_driver):
+    def aest_search_form_reset_data(self, admin_page_driver):
+        data = {
+            "username": "Admin",
+            "userRole": "Admin",
+            "employeeName": "a",
+            "status": "Enabled"
+        }
+        # Login OrangeHRM and then go to Admin page
         admin_page = AdminPage(admin_page_driver)
-        admin_page.select_user_role_dropdown("Admin")
-        assert admin_page.get_user_role_item() == "Admin"
-    
-    def test_redirect_adding_form(self, admin_page_driver):
-        admin_page = AdminPage(admin_page_driver)
-        admin_page.click_on_add_button()
-        assert 'admin/saveSystemUser' in admin_page_driver.current_url
-    
-    def test_searching_with_user_role(self, admin_page_driver):
-        admin_page = AdminPage(admin_page_driver)
-        admin_page.select_user_role_dropdown("Admin")
-        admin_page.click_on_search_button()
-        #response = HRMUserApi.get_all_users(admin_page_driver)
-        #print(response.url, response.headers)
-        #assert response.status_code == 200
-        assert  admin_page.get_total_number_user() == 10
+        # Input và Reset data on search from
+        admin_page.reset_search_form(data["username"], data["userRole"], data["employeeName"], data["status"])
+        # Verify search form after pressing on reset button
+        check.equal(admin_page.get_username(), "")
+        check.equal(admin_page.get_user_role(), "-- Select --")
+        check.equal(admin_page.get_employee_name(), "")
+        check.equal(admin_page.get_status(), "-- Select --")
+
+
 

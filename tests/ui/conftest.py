@@ -1,7 +1,7 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 import pytest
-from selenium import webdriver
+from seleniumwire import webdriver
 from selenium.webdriver.support.wait import WebDriverWait
 
 from utils.config_reader import ConfigReader
@@ -43,7 +43,6 @@ def driver():
     # Get cookies
 
 
-    print(f"[DEBUG] Running test with BASE URL: {os.getenv("BASE_URL")}")
     # Receive BASE_URL from application_deploy.yml else get from testsetting.json
     base_url = os.getenv("BASE_URL")
     if base_url is None:

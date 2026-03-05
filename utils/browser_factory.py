@@ -9,6 +9,10 @@ import os
 # Configuration Browser Options
 def config_chrome_options(headless_flag):
     options = ChromeOptions()
+    options.add_argument('--lang=en-US')
+    options.add_experimental_option(
+        "prefs", {"intl.accept_languages": "en,en_US"}
+    )
     if headless_flag:
         options.add_argument('--headless=new')
     else:
@@ -19,6 +23,7 @@ def config_chrome_options(headless_flag):
 
 def config_firefox_options(headless_flag):
     options = FirefoxOptions()
+    options.add_argument('--lang=en-US')
     if headless_flag:
         options.add_argument('--headless')
     else:

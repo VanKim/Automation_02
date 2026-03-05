@@ -20,6 +20,11 @@ class BasePage:
             EC.presence_of_element_located(locator)
         )
 
+    def find_elements(self, locator, timeout=10):
+        return WebDriverWait(self.driver, timeout).until(
+            EC.presence_of_all_elements_located(locator)
+        )
+
     def send_keys(self, locator, value, clear, timeout=10):
         element = WebDriverWait(self.driver, timeout).until(
             EC.visibility_of_element_located(locator)
@@ -46,8 +51,26 @@ class BasePage:
         element = Select(self.find_element(locator))
         element.select_by_index(index)
 
-    def select_value_custom_dropdown(self, locator):
-        self.find_element(locator)
-        self.click(locator)
-    
-       
+    def select_value_custom_dropdown(self, locator, value ):
+        value_list = self.find_elements(locator)
+        element = None
+        for item in value_list:
+            if item.text == value:
+                element = item
+                break
+        self.click(element)
+
+    def select_value_autocomplete_list(self, locator):
+        WebDriverWait(self.driver, 10).until(
+            EC.invisibility_of_element_located(
+                (By.XPATH, "//div[@role='option'][contains(.,'Searching')]")
+            )
+        )
+        employee_name_list = WebDriverWait(self.driver, 10).until(
+            EC.presence_of_all_elements_located(locator)
+        )
+        self.click(employee_name_list[0])
+
+
+
+
