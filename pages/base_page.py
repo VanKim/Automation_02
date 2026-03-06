@@ -3,7 +3,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.common.exceptions import (StaleElementReferenceException, ElementClickInterceptedException)
+from selenium.common.exceptions import (StaleElementReferenceException, ElementClickInterceptedException, TimeoutException)
 
 class BasePage:
     def __init__(self, driver):
@@ -21,9 +21,16 @@ class BasePage:
         )
 
     def find_elements(self, locator, timeout=10):
-        return WebDriverWait(self.driver, timeout).until(
-            EC.presence_of_all_elements_located(locator)
-        )
+
+        try:
+            elements= WebDriverWait(self.driver, timeout).until(
+            EC.presence_of_all_elements_located(locator))
+        except TimeoutException:
+            return self.driver.find_elements(*locator)
+        else:
+            return elements
+
+
 
     def send_keys(self, locator, value, clear, timeout=10):
         element = WebDriverWait(self.driver, timeout).until(
@@ -57,11 +64,11 @@ class BasePage:
         for item in value_list:
             if item.text == value:
                 element = item
+                self.click(element)
                 break
-        self.click(element)
 
     def select_value_autocomplete_list(self, locator):
-        WebDriverWait(self.driver, 10).until(
+        WebDriverWait(self.driver, 12).until(
             EC.invisibility_of_element_located(
                 (By.XPATH, "//div[@role='option'][contains(.,'Searching')]")
             )
@@ -71,6 +78,8 @@ class BasePage:
         )
         self.click(employee_name_list[0])
 
+    def current_url(self, url):
+        WebDriverWait(self.driver, 15).until(EC.url_contains(url))
 
 
 

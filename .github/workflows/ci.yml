@@ -14,7 +14,7 @@ jobs:
       fail-fast: false
       matrix:
         suite: ["tests/ui/functional/login_page"]
-        browser: ["Chrome", "Firefox"]
+        browser: ["Chrome", "Edge"]
     env:
       BROWSER: ${{ matrix.browser }}
       HEADLESS: true
