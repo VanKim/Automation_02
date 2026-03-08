@@ -17,8 +17,8 @@ class TestAdminPage:
         key, value =  list(data["option"].items())[0]
         # Get nav_list
         nav_list = admin_page.get_navigation_list()
-        assert nav_list is False, "navigation list is empty"
         print(f'[DEBUG]nav_list: {nav_list}')
+        assert nav_list is False, "navigation list is empty"
         # Get nav_tab correspond with data["name"]
         nav_tab = admin_page.get_navigation_tab(nav_list, data["name"])
         # Click nav_tab
