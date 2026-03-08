@@ -126,7 +126,7 @@ class AdminPage(BasePage):
         print(f'[DEBUG]nav_tab in getnavigation_tab method: {nav_list},,,,,{nav_name}\n\n')
         for i in nav_list:
             element_name = i.find_element(*self.__navigation_tab_name__)
-            print(f'[DEBUG]element_name: {element_name.get_attribute("outerHTML")}')
+            print(f'\n\n[DEBUG]element_name: {element_name.get_attribute("outerHTML")}&&&{element_name.text}\n\n')
             if element_name.text.strip() == nav_name:
                 return i
         return None
