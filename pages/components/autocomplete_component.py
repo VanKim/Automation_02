@@ -21,10 +21,8 @@ class AutocompleteComponents(BasePage):
         return (By.XPATH, f"//label[.='{label}']/ancestor::div[contains(@class, 'oxd-input-field-bottom-space')]//div[contains(@role, 'listbox')]/div[contains(@role, 'option')]")
 
     def select_option_on_suggestion_list(self, label, keyword):
-        locator = self.get_xpath_keyword_autocomplete(label)
-        locators = self.get_xpath_suggesstion_list(label)
-        self.send_keys(locator, keyword, True)
         if keyword != '':
+            locator = self.get_xpath_keyword_autocomplete(label)
+            locators = self.get_xpath_suggesstion_list(label)
+            self.send_keys(locator, keyword, True)
             self.select_value_autocomplete_list(locators)
-
-

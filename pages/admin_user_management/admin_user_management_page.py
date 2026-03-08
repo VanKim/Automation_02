@@ -1,3 +1,6 @@
+from time import sleep
+
+from selenium.common import NoSuchElementException, StaleElementReferenceException
 from selenium.webdriver import Keys
 from selenium.webdriver.common.by import By
 from pages.base_page import BasePage
@@ -5,26 +8,24 @@ import json
 from utils.wait_for_api import *
 from pages.components.button_component import ButtonComponents as Button
 from pages.components.input_component import InputComponents as Input
+from pages.components.dropdown_component import DropdownComponents as Dropdown
+from pages.components.autocomplete_component import AutocompleteComponents as Autocomplete
 
 class AdminPage(BasePage):
 
     def __init__(self, driver):
         super().__init__(driver)
-       ###### Searching form layout
+        ##### Searching form layout
         # username input field
-        self.__input_fields__ = Input(self.driver)
-        self.__user_role__ = (By.XPATH, "//label[.='User Role']/ancestor::div[contains(@class,'oxd-input-field-bottom-space')]//div[@class ='oxd-select-text-input']")
-        self.__user_role_list__ = (By.XPATH, "//label[.='User Role']/ancestor::div[contains(@class, 'oxd-input-field-bottom-space')]//div[contains(@role, 'listbox')]/div[contains(@role, 'option')]")
-        self.__user_role_toggle__ = (By.XPATH, "//label[.='User Role']/ancestor::div[contains(@class, 'oxd-input-field-bottom-space')]//i")
-        self.__employee_name__ = (By.XPATH, "//input[contains(@placeholder,'Type for hints')]")
-        self.__autocomplete_employee__ = (By.XPATH, "//label[.='Employee Name']/ancestor::div[contains(@class, 'oxd-input-field-bottom-space')]//div[contains(@role, 'listbox')]/div[contains(@role, 'option')]")
-        self.__status___ = (By.XPATH,"//label[.='Status']/ancestor::div[contains(@class,'oxd-input-field-bottom-space')]//div[@class ='oxd-select-text-input']")
-        self.__status_list__ = (By.XPATH, "//label[.='Status']/ancestor::div[contains(@class,'oxd-input-field-bottom-space')]//div[contains(@role, 'listbox')]/div[contains(@role, 'option')]")
-        self.__status_toggle__ = (By.XPATH, "//label[.='Status']/ancestor::div[contains(@class, 'oxd-input-field-bottom-space')]//i")
+        self.__input_field__ = Input(self.driver)
+        # Dropdown: Status, User Role
+        self.__dropdown__ = Dropdown(self.driver)
+        # Autocomplete field: employee Name
+        self.__autocomplete_field__ = Autocomplete(self.driver)
         # Have 3 buttons: Reset, Search, Add
-        self.__buttons__ = Button(self.driver)
+        self.__button__ = Button(self.driver)
 
-        ###### User list table
+        ###### User list table layout
         self.__total_records__ = (By.XPATH, "//div[@class='orangehrm-paper-container']/descendant::span")
         # Header table
         self.__header_table__ = (By.XPATH, "//div[@role='table']/div[@class='oxd-table-header']//div[@role='columnheader']")
@@ -40,49 +41,40 @@ class AdminPage(BasePage):
         self.__confirm_popup_yes_button__ = (By.XPATH, "(.//div[contains(@class, 'orangehrm-dialog-popup')]/div[contains(@class, 'orangehrm-modal-footer')]/button)[2]")
         self.__confirm_popup_no_button__ = (By.XPATH, "(.//div[contains(@class, 'orangehrm-dialog-popup')]/div[contains(@class, 'orangehrm-modal-footer')]/button)[1]")
 
-        ###### Navigation Header
-
+        ###### Navigation Header layout
+        self.__navigation_tab_list__ = (By.XPATH, "//nav[@role='navigation' and @aria-label='Topbar Menu']/ul/li")
+        self.__navigation_tab_name__ = (By.XPATH, ".//a | .//span")
+        self.__option_list_nav_tab__ = (By.XPATH, ".//ul/li")
+        self.__option_nav_tab__ = (By.XPATH, ".//a")
+        self.__navigation_tab_toggle__ = (By.XPATH, ".//span/i")
 
     ##### Method #######
     # Group methods of searching form
     def get_username(self):
-        return self.__input_fields__.get_input_field("Username")
-
-    def select_user_role_dropdown(self, user_role_item):
-        self.click(self.__user_role_toggle__)
-        self.select_value_custom_dropdown(self.__user_role_list__, user_role_item)
+        return self.__input_field__.get_input_field("Username")
 
     def get_user_role(self):
-        return self.text(self.__user_role__)
-
-    def select_status_dropdown(self, status_item):
-        self.click(self.__status_toggle__)
-        self.select_value_custom_dropdown(self.__status_list__, status_item)
+        return self.__dropdown__.get_item_dropdown("User Role")
 
     def get_status(self):
-        return self.text(self.__status___)
-
-    def input_employee_name(self, keyword):
-        self.send_keys(self.__employee_name__, keyword, True)
-        if keyword != '':
-            self.select_value_autocomplete_list(self.__autocomplete_employee__)
+        return self.__dropdown__.get_item_dropdown("Status")
 
     def get_employee_name(self):
-        return self.text(self.__employee_name__)
+        return self.__autocomplete_field__.get_keyword_autocomplete_field("Employee Name")
 
     def search_user_account(self, username, user_role, employee_name, status):
-        self.__input_fields__.enter_input_field("Username")
-        self.select_user_role_dropdown(user_role)
-        self.input_employee_name(employee_name)
-        self.select_status_dropdown(status)
-        self.__buttons__.click_button("Search")
+        self.__input_field__.enter_input_field("Username", username)
+        self.__dropdown__.select_item_dropdown("User Role", user_role)
+        self.__autocomplete_field__.select_option_on_suggestion_list("Employee Name", employee_name)
+        self.__dropdown__.select_item_dropdown("Status", status)
+        self.__button__.click_button("Search")
 
     def reset_search_form(self, username, user_role, employee_name, status):
-        self.__input_fields__.enter_input_field("Username")
-        self.select_user_role_dropdown(user_role)
-        self.input_employee_name(employee_name)
-        self.select_status_dropdown(status)
-        self.__buttons__.click_button("Reset")
+        self.__input_field__.enter_input_field("Username", username)
+        self.__dropdown__.select_item_dropdown("User Role", user_role)
+        self.__autocomplete_field__.select_option_on_suggestion_list("Employee Name", employee_name)
+        self.__dropdown__.select_item_dropdown("Status", status)
+        self.__button__.click_button("Reset")
 
     # User Account list from API
     def get_response_user_account_list(self, keyword):
@@ -108,12 +100,60 @@ class AdminPage(BasePage):
         return data_record
 
     def delete_action(self, record_row):
-        record_row.click(*self.__delete_action__)
+        record_row.find_element(*self.__delete_action__).click()
+
+    def confirm_delete_popup(self, flag):
+        if flag:
+            self.click(self.__confirm_popup_yes_button__)
+        else:
+            self.click(self.__confirm_popup_no_button__)
 
     def edit_action(self, record_row):
         record_row.click(*self.__edit_action__)
 
     def add_button(self):
-        self.__buttons__.click_button("Add")
+        self.__button__.click_button("Add")
 
     # Navigation Header
+    def get_navigation_list(self):
+        return self.find_elements(self.__navigation_tab_list__)
+
+    # Get webElement for a navigation tab
+    def get_navigation_tab(self, nav_list, nav_name):
+        for i in nav_list:
+            element_name = i.find_element(*self.__navigation_tab_name__)
+            if element_name.text.strip() == nav_name:
+                return i
+        return None
+
+    # Get option list of a navigation tab
+    def get_option_list_of_nav_tab(self, nav_tab):
+        try:
+            return nav_tab.find_elements(*self.__option_list_nav_tab__)
+        except (NoSuchElementException, StaleElementReferenceException):
+            return None
+
+    def open_option_list_nav_tab(self, nav_tab):
+        try:
+            nav_tab.find_element(*self.__navigation_tab_toggle__)
+            nav_tab.click()
+        except (NoSuchElementException, StaleElementReferenceException):
+            return None
+
+    # Action for navigation tabs don't have any options
+    def click_on_navigation_tab(self, nav_tab):
+        nav_tab.click()
+
+    # Action for navigation tabs have at least one option
+    def select_option_of_a_navigation_tab(self, options, option_name):
+        for i in options:
+            element = i.find_element(*self.__option_nav_tab__)
+            if element.get_attribute("innerHTML").strip() == option_name:
+                element.click()
+                break
+
+    def back(self):
+        self.driver.back()
+
+    def get_current_url(self):
+        return self.driver.current_url

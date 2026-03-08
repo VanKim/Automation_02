@@ -1,0 +1,142 @@
+[
+  {
+    "name": "User Management",
+    "option": {
+      "Users": "orangehrmlive.com/web/index.php/admin/viewSystemUsers"
+    }
+  },
+  {
+    "name": "Job",
+    "option": {
+      "Job Titles": "orangehrmlive.com/web/index.php/admin/viewJobTitleList"
+    }
+  },
+  {
+    "name": "Job",
+    "option": {
+      "Pay Grades": "orangehrmlive.com/web/index.php/admin/viewPayGrades"
+    }
+  },
+  {
+    "name": "Job",
+    "option": {
+      "Employment Status": "orangehrmlive.com/web/index.php/admin/employmentStatus"
+    }
+  },
+  {
+    "name": "Job",
+    "option": {
+      "Job Categories": "orangehrmlive.com/web/index.php/admin/jobCategory"
+    }
+  },
+  {
+    "name": "Job",
+    "option": {
+      "Work Shifts": "orangehrmlive.com/web/index.php/admin/workShift"
+    }
+  },
+  {
+    "name": "Organization",
+    "option": {
+      "General Information": "orangehrmlive.com/web/index.php/admin/viewOrganizationGeneralInformation"
+    }
+  },
+  {
+    "name": "Organization",
+    "option": {
+      "Structure": "orangehrmlive.com/web/index.php/admin/viewCompanyStructure"
+    }
+  },
+  {
+    "name": "Organization",
+    "option": {
+      "Locations": "orangehrmlive.com/web/index.php/admin/viewLocations"
+    }
+  },
+  {
+    "name": "Qualifications",
+    "option": {
+      "Skills": "orangehrmlive.com/web/index.php/admin/viewSkills"
+    }
+  },
+  {
+    "name": "Qualifications",
+    "option": {
+      "Education": "orangehrmlive.com/web/index.php/admin/viewEducation"
+    }
+  },
+  {
+    "name": "Qualifications",
+    "option": {
+      "Licenses": "orangehrmlive.com/web/index.php/admin/viewLicenses"
+    }
+  },
+  {
+    "name": "Qualifications",
+    "option": {
+      "Languages": "orangehrmlive.com/web/index.php/admin/viewLanguages"
+    }
+  },
+  {
+    "name": "Qualifications",
+    "option": {
+      "Memberships": "orangehrmlive.com/web/index.php/admin/membership"
+    }
+  },
+  {
+    "name": "Nationalities",
+    "option": {
+      "Nationalities": "orangehrmlive.com/web/index.php/admin/nationality"
+    }
+  },
+  {
+    "name": "Corporate Branding",
+    "option": {
+      "Corporate Branding": "orangehrmlive.com/web/index.php/admin/addTheme"
+    }
+  },
+  {
+    "name": "Configuration",
+    "option": {
+      "Email Configuration": "orangehrmlive.com/web/index.php/admin/listMailConfiguration"
+    }
+  },
+  {
+    "name": "Configuration",
+    "option": {
+      "Email Subscriptions": "orangehrmlive.com/web/index.php/admin/viewEmailNotification"
+      }
+  },
+  {
+    "name": "Configuration",
+    "option": {
+      "Language Packages": "orangehrmlive.com/web/index.php/admin/languagePackage"
+      }
+  },
+  {
+    "name": "Configuration",
+    "option": {
+      "Modules": "orangehrmlive.com/web/index.php/admin/viewModules"
+      }
+  },
+  {
+    "name": "Configuration",
+    "option": {
+      "Social Media Authentication": "orangehrmlive.com/web/index.php/admin/openIdProvider"
+    }
+  },
+  {
+    "name": "Configuration",
+    "option": {
+      "Register OAuth Client": "orangehrmlive.com/web/index.php/admin/registerOAuthClient"
+    }
+  },
+  {
+    "name": "Configuration",
+    "option": {
+      "LDAP Configuration": "orangehrmlive.com/web/index.php/admin/ldapConfiguration"
+    }
+  }
+
+
+]

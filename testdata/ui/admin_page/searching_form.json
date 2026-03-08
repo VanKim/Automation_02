@@ -16,13 +16,6 @@
   "endpoint": "/api/v2/admin/users?limit=50&offset=0&username=Admin&status=1&sortField=u.userName&sortOrder=ASC"
   },
   {
-  "username": "",
-  "userRole": "-- Select --",
-  "employeeName": "van tht",
-  "status": "-- Select --",
-  "endpoint": "api/v2/admin/users?limit=50&offset=0&empNumber=210&sortField=u.userName&sortOrder=ASC"
-  },
-  {
       "username": "",
       "userRole": "-- Select --",
       "employeeName": "",

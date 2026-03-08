@@ -30,8 +30,6 @@ class BasePage:
         else:
             return elements
 
-
-
     def send_keys(self, locator, value, clear, timeout=10):
         element = WebDriverWait(self.driver, timeout).until(
             EC.visibility_of_element_located(locator)
@@ -45,11 +43,11 @@ class BasePage:
             self.wait_for_element_clickable(locator).click()
         except (StaleElementReferenceException, ElementClickInterceptedException):
             self.wait_for_element_clickable(locator).click()
-        
+
     def wait_for_element_clickable(self, locator, timeout = 10):
          wait = WebDriverWait(self.driver, timeout)
          return wait.until(EC.element_to_be_clickable(locator))
-        
+
     def select_drop_down_by_text(self, locator, value):
         element = Select(self.find_element(locator))
         element.select_by_visible_text(value)
@@ -79,7 +77,9 @@ class BasePage:
         self.click(employee_name_list[0])
 
     def current_url(self, url):
-        WebDriverWait(self.driver, 15).until(EC.url_contains(url))
+        WebDriverWait(self.driver, 10).until(EC.url_contains(url))
 
-
+    def wait_for_element_visibile(self, locator, timeout = 10):
+         wait = WebDriverWait(self.driver, timeout)
+         return wait.until(EC.visibility_of_all_elements_located(locator))
 

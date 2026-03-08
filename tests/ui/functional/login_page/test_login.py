@@ -2,7 +2,7 @@ from pages.login_page import LoginPage
 from pages.dashboard.dashboard_page import DashboardPage
 import pytest
 
-@pytest.mark.smoke
+@pytest.mark.functional
 class TestLoginPage:
     def test_login_successfully_valid_account_with_click_button(self, driver, credentials):
         login_page = LoginPage(driver)
