@@ -20,7 +20,7 @@ class TestAdminPage:
         # Get nav_list
         nav_list = admin_page.get_navigation_list()
         print(f'[DEBUG]nav_list: {nav_list}')
-        assert len(nav_list) == 0, "navigation list is empty"
+        assert len(nav_list) != 0, "navigation list is empty"
         # Get nav_tab correspond with data["name"]
         nav_tab = admin_page.get_navigation_tab(nav_list, data["name"])
         # Click nav_tab
