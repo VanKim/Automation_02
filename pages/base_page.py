@@ -23,11 +23,12 @@ class BasePage:
     def find_elements(self, locator, timeout=20):
         wait = WebDriverWait(self.driver, timeout)
         print(f'[DEBUG]LOCATOR: {locator}')
-        try:
-            elements = wait.until(EC.visibility_of_all_elements_located(locator))
-        except TimeoutException:
-            elements = wait.until(EC.visibility_of_all_elements_located(locator))
-        return elements
+        return wait.until(EC.presence_of_all_elements_located(locator))
+        # try:
+        #     elements = wait.until(EC.visibility_of_all_elements_located(locator))
+        # except TimeoutException:
+        #     elements = wait.until(EC.visibility_of_all_elements_located(locator))
+        # return elements
 
     def send_keys(self, locator, value, clear, timeout=10):
         element = WebDriverWait(self.driver, timeout).until(
