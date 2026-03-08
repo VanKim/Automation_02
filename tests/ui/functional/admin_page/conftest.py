@@ -11,13 +11,13 @@ def admin_page_driver(login_driver):
 
     wait.until(
         EC.presence_of_element_located(
-            (By.XPATH, "//span[normalize-space(.)='Admin']")
+            (By.XPATH, "//a[contains(@href, 'admin/viewAdminModule')]")
         )
     )
 
     admin_menu = wait.until(
         EC.element_to_be_clickable(
-            (By.XPATH, "//span[normalize-space(.)='Admin']")
+            (By.XPATH, "//a[contains(@href, 'admin/viewAdminModule')]")
         )
     )
 
