@@ -27,8 +27,7 @@ class BasePage:
             elements = wait.until(EC.visibility_of_all_elements_located(locator))
         except TimeoutException:
             elements = wait.until(EC.visibility_of_all_elements_located(locator))
-        else:
-            return elements
+        return elements
 
     def send_keys(self, locator, value, clear, timeout=10):
         element = WebDriverWait(self.driver, timeout).until(
