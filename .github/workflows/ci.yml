@@ -46,6 +46,12 @@ jobs:
         name: test-report-${{env.NAME}}
         path: report/*.html
 
+    - name: Upload screenshot
+      uses: actions/upload-artifact@v4
+      with:
+        name: screenshots
+        path: report/*.png
+
   API_test:
     runs-on: ubuntu-latest
     strategy:

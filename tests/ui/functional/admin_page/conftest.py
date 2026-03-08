@@ -9,23 +9,26 @@ def admin_page_driver(login_driver):
 
     # wait dashboard load
     print(f'\n\nCURRENT URL{login_driver.current_url}\n\n')
-    wait.until(
-        EC.presence_of_element_located(
-            (By.CLASS_NAME, "oxd-sidepanel")
+    try:
+        wait.until(
+            EC.presence_of_element_located(
+                (By.CLASS_NAME, "oxd-sidepanel")
+            )
         )
-    )
 
-    wait.until(
-        EC.presence_of_element_located(
-            (By.XPATH, "//span[normalize-space(.)='Admin']")
+        wait.until(
+            EC.presence_of_element_located(
+                (By.XPATH, "//span[normalize-space(.)='Admin']")
+            )
         )
-    )
 
-    admin_menu = wait.until(
-        EC.element_to_be_clickable(
-            (By.XPATH, "//span[normalize-space(.)='Admin']")
+        admin_menu = wait.until(
+            EC.element_to_be_clickable(
+                (By.XPATH, "//span[normalize-space(.)='Admin']")
+            )
         )
-    )
-    admin_menu.click()
-    wait.until(EC.url_contains("/admin/viewSystemUsers"))
+        admin_menu.click()
+        wait.until(EC.url_contains("/admin/viewSystemUsers"))
+    except:
+        login_driver.save_screenshot("report/debug_admin.png")
     return login_driver
