@@ -24,9 +24,7 @@ class BasePage:
         wait = WebDriverWait(self.driver, timeout)
 
         try:
-            wait.until(EC.presence_of_all_elements_located(locator))
-            elements= wait.until(EC.visibility_of_all_elements_located(locator))
-
+            elements = wait.until(EC.presence_of_all_elements_located(locator))
         except TimeoutException:
             elements = wait.until(EC.visibility_of_all_elements_located(locator))
         else:
