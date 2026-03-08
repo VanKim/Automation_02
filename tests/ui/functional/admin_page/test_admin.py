@@ -15,7 +15,7 @@ class TestAdminPage:
         print(f'[DEBUG]ADMIN - CURRENT: {admin_page_driver.current_url}')
         print(f'[DEBUG] DRIVER: {admin_page_driver}\n')
         print(f'[DEBUG] Data: {data}\n')
-        print(f'[DEBUG]PAGESOURCE: {admin_page_driver.page_source()}\n\n')
+        print(f'[DEBUG]PAGESOURCE: {admin_page_driver.page_source}\n\n')
         admin_page = AdminPage(admin_page_driver)
         key, value =  list(data["option"].items())[0]
         # Get nav_list
