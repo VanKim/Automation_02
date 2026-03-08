@@ -23,6 +23,7 @@ class TestAdminPage:
         assert len(nav_list) != 0, "navigation list is empty"
         # Get nav_tab correspond with data["name"]
         nav_tab = admin_page.get_navigation_tab(nav_list, data["name"])
+        print(f'[DEBUG]nav_tab: {nav_tab}')
         # Click nav_tab
         admin_page.open_option_list_nav_tab(nav_tab)
         # Get option list

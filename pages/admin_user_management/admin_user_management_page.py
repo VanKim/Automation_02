@@ -123,6 +123,8 @@ class AdminPage(BasePage):
 
     # Get webElement for a navigation tab
     def get_navigation_tab(self, nav_list, nav_name):
+        print(f'[DEBUG]nav_tab in getnavigation_tab method: {nav_list},,,,,{nav_name}\n\n')
+        print(f'[DEBUG]PAGESOURCE: {self.driver.page_source()}\n\n')
         for i in nav_list:
             element_name = i.find_element(*self.__navigation_tab_name__)
             if element_name.text.strip() == nav_name:
