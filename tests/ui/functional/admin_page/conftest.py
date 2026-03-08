@@ -8,7 +8,7 @@ from selenium.webdriver.common.by import By
 def admin_page_driver(login_driver):
     wait = WebDriverWait(login_driver, 250)
     print(f'[DEBUG]\n\nCURRENT URL{login_driver.current_url}\n\n')
-    locator = (By.XPATH, "//nav[@role='navigation']//*[text()='Admin']/ancestor::a")
+    locator = (By.XPATH, "//nav[@role='navigation']//*[normalize-space()='Admin']/ancestor::a")
     admin_page = wait.until(EC.presence_of_element_located(locator))
     #print(f'[DEBUG]\n\nPAGE SOURCE: {login_driver.page_source}\n\n')
     print(f'[DEBUG]\n\nPAURCE1111: {admin_page.get_attribute('outerHTML')} &&{admin_page}\n\n')
