@@ -25,6 +25,7 @@ class TestAdminPage:
         # Get nav_tab correspond with data["name"]
         nav_tab = admin_page.get_navigation_tab(nav_list, data["name"])
         print(f'[DEBUG]nav_tab: {nav_tab}')
+        check.is_true(nav_tab, f"Navigation tab name {data['name']} don't find on UI ")
         # Click nav_tab
         admin_page.open_option_list_nav_tab(nav_tab)
         # Get option list
