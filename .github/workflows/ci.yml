@@ -13,12 +13,12 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        suite: ["tests/ui/functional/login_page"]
+        suite: ["functional"]
         browser: ["Chrome", "Edge"]
     env:
       BROWSER: ${{ matrix.browser }}
       HEADLESS: true
-      NAME:  login_page_${{ matrix.browser }}
+      NAME:  ${{ matrix.suite }}_${{ matrix.browser }}
 
     steps:
     - name: Checkout source code from github
@@ -37,7 +37,7 @@ jobs:
       run: mkdir -p report
 
     - name: Run test
-      run: pytest -s ${{matrix.suite}} --html=report/report_${{env.NAME}}.html --maxfail=1 --self-contained-html --disable-warnings
+      run: pytest -m -s ${{matrix.suite}} --html=report/report_${{env.NAME}}.html --maxfail=1 --self-contained-html --disable-warnings
 
     - name: Upload test report
       if: always()
