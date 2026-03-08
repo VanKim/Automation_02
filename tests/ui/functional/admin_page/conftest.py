@@ -22,7 +22,7 @@ def admin_page_driver(login_driver):
         )
         admin_menu.click()
         wait.until(EC.url_contains("/admin/viewSystemUsers"))
+        print("\n\n\n\nJFGKFBKGJBDKFBGKDB\n\n\n\n")
     except TimeoutException:
         login_driver.save_screenshot("report/debug_admin.png")
-
     return login_driver
