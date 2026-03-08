@@ -7,6 +7,7 @@ from selenium.webdriver.common.by import By
 def admin_page_driver(login_driver):
     wait = WebDriverWait(login_driver, 30)
     # wait dashboard load
+    print(f'\n\nCURRENT URL{login_driver.current_url}\n\n')
     wait.until(
         EC.presence_of_element_located(
             (By.XPATH, "//span[normalize-space(.)='Admin']")
@@ -26,7 +27,6 @@ def admin_page_driver(login_driver):
             (By.XPATH, "//span[normalize-space(.)='Admin']")
         )
     )
-
     admin_menu.click()
     wait.until(EC.url_contains("/admin/viewSystemUsers"))
     return login_driver
