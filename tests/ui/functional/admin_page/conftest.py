@@ -12,6 +12,7 @@ def admin_page_driver(login_driver):
     admin_page = wait.until(
         EC.presence_of_element_located(locator)
     )
+    admin_page.click()
     print(f"\n\n\n\n[INFO1:] JFGKFBKGJBDKFBGKDB {admin_page.get_attribute("outerHTML")}\n\n\n\n")
     admin_page = wait.until(
         EC.element_to_be_clickable(
