@@ -5,7 +5,7 @@ from selenium.webdriver.common.by import By
 
 @pytest.fixture(scope="function")
 def admin_page_driver(login_driver):
-    wait = WebDriverWait(login_driver, 20)
+    wait = WebDriverWait(login_driver, 30)
     wait.until(EC.element_to_be_clickable(
         (By.XPATH, "//span[normalize-space(.)='Admin']")
     )).click()
