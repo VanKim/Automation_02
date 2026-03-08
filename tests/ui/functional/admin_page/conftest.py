@@ -6,10 +6,12 @@ from selenium.webdriver.common.by import By
 
 @pytest.fixture(scope="function")
 def admin_page_driver(login_driver):
-    wait = WebDriverWait(login_driver, 100)
+    wait = WebDriverWait(login_driver, 120)
     print(f'[DEBUG]\n\nCURRENT URL{login_driver.current_url}\n\n')
     locator = (By.XPATH, "//nav[@role='navigation']//*[text()='Admin']")
+    admin_page = wait.until(EC.presence_of_element_located(locator))
     print(f'[DEBUG]\n\nPAGE SOURCE: {login_driver.page_source}\n\n')
+    print(f'[DEBUG]\n\nPAURCE: {admin_page}\n\n')
     print("Admin exist:", login_driver.find_elements(*locator))
     admin_page = wait.until(EC.element_to_be_clickable(locator)).click()
     #print(f"\n\n\n\n[INFO2:] JFGKFBKGJBDKFBGKDB{admin_page}\n\n\n\n")
