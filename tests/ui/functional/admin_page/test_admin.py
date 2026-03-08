@@ -12,6 +12,7 @@ class TestAdminPage:
     @pytest.mark.parametrize("data", DataReader.read_data_from_json_file('./testdata/ui/admin_page/navigation.json'))
     # Test Header Navigation
     def test_a_navigation_tab(self, admin_page_driver, data):
+        print(f'[DEBUG] DRIVER: {admin_page_driver}\n')
         print(f'[DEBUG] Data: {data}\n')
         admin_page = AdminPage(admin_page_driver)
         key, value =  list(data["option"].items())[0]

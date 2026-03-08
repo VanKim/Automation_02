@@ -7,16 +7,8 @@ from selenium.webdriver.common.by import By
 @pytest.fixture(scope="function")
 def admin_page_driver(login_driver):
     wait = WebDriverWait(login_driver, 15)
-
-    # wait dashboard load
-    print(f'\n\nCURRENT URL{login_driver.current_url}\n\n')
+    print(f'[DEBUG]\n\nCURRENT URL{login_driver.current_url}\n\n')
     try:
-        wait.until(
-            EC.presence_of_element_located(
-                (By.CLASS_NAME, "oxd-sidepanel")
-            )
-        )
-
         wait.until(
             EC.presence_of_element_located(
                 (By.XPATH, "//span[normalize-space(.)='Admin']")
@@ -32,4 +24,5 @@ def admin_page_driver(login_driver):
         wait.until(EC.url_contains("/admin/viewSystemUsers"))
     except TimeoutException:
         login_driver.save_screenshot("report/debug_admin.png")
+
     return login_driver
