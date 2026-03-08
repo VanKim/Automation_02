@@ -13,8 +13,15 @@ def admin_page_driver(login_driver):
         )
     )
 
-    wait.until(EC.element_to_be_clickable(
-        (By.XPATH, "//span[normalize-space(.)='Admin']")
-    )).click()
+    # wait.until(EC.element_to_be_clickable(
+    #     (By.XPATH, "//span[normalize-space(.)='Admin']")
+    # )).click()
+    admin_menu = wait.until(
+        EC.element_to_be_clickable(
+            (By.XPATH, "//span[normalize-space(.)='Admin']")
+        )
+    )
+
+    admin_menu.click()
     wait.until(EC.url_contains("/admin/viewSystemUsers"))
     return login_driver
