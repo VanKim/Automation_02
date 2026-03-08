@@ -17,6 +17,8 @@ class TestAdminPage:
         key, value =  list(data["option"].items())[0]
         # Get nav_list
         nav_list = admin_page.get_navigation_list()
+        assert nav_list is False, "navigation list is empty"
+        print(f'nav_list: {nav_list}')
         # Get nav_tab correspond with data["name"]
         nav_tab = admin_page.get_navigation_tab(nav_list, data["name"])
         # Click nav_tab
@@ -30,7 +32,7 @@ class TestAdminPage:
             admin_page.click_on_navigation_tab(nav_tab)
         # Verify redirect to url correspond with the selected option
         admin_page.current_url(value)
-        assert value in admin_page.get_current_url()
+        check.is_in(value, admin_page.get_current_url() )
         admin_page.back()
         admin_page.current_url('/admin/viewSystemUsers')
         check.is_in('/admin/viewSystemUsers',admin_page.get_current_url())

@@ -1,11 +1,12 @@
 import pytest
+from selenium.common import TimeoutException
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 
 @pytest.fixture(scope="function")
 def admin_page_driver(login_driver):
-    wait = WebDriverWait(login_driver, 30)
+    wait = WebDriverWait(login_driver, 15)
 
     # wait dashboard load
     print(f'\n\nCURRENT URL{login_driver.current_url}\n\n')
@@ -29,6 +30,6 @@ def admin_page_driver(login_driver):
         )
         admin_menu.click()
         wait.until(EC.url_contains("/admin/viewSystemUsers"))
-    except:
+    except TimeoutException:
         login_driver.save_screenshot("report/debug_admin.png")
     return login_driver
