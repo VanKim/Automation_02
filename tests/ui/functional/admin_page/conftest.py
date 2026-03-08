@@ -6,6 +6,7 @@ from selenium.webdriver.common.by import By
 
 @pytest.fixture(scope="function")
 def admin_page_driver(login_driver):
+
     wait = WebDriverWait(login_driver, 250)
     print(f'[DEBUG]\n\nCURRENT URL{login_driver.current_url}\n\n')
     locator = (By.XPATH, "//nav[@role='navigation']//*[normalize-space()='Admin']/ancestor::a")
@@ -13,17 +14,14 @@ def admin_page_driver(login_driver):
     #print(f'[DEBUG]\n\nPAGE SOURCE: {login_driver.page_source}\n\n')
     print(f'[DEBUG]\n\nPAURCE1111: {admin_page.get_attribute('outerHTML')} &&{admin_page}\n\n')
     #admin_page = wait.until(EC.visibility_of_element_located(locator))
-    wait.until(EC.presence_of_element_located((By.XPATH, "//h6[text()='Dashboard']")))
+    login_driver.save_screenshot("report/debug.png")
     overlay = login_driver.find_elements(By.CLASS_NAME, "oxd-loading-spinner")
-
     if len(overlay) > 0:
         print("Overlay đang tồn tại")
+        login_driver.execute_script("arguments[0].click();", admin_page)
     else:
         print("Không có overlay")
-    login_driver.save_screenshot("report/debug.png")
-    admin_page = wait.until(EC.element_to_be_clickable(locator))
-    print(f'[DEBUG]\n\nPAURCE2222: {admin_page}\n\n')
-    admin_page.click()
-    #wait.until(EC.url_contains("/admin/viewSystemUsers"))
+        admin_page = wait.until(EC.element_to_be_clickable(locator)).click()
+    wait.until(EC.url_contains("/admin/viewSystemUsers"))
     print(f'[DEBUG]\n\nCURRENT URL{login_driver.current_url}\n\n')
     return login_driver
