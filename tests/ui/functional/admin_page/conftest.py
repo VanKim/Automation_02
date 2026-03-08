@@ -13,7 +13,8 @@ def admin_page_driver(login_driver):
     #print(f'[DEBUG]\n\nPAGE SOURCE: {login_driver.page_source}\n\n')
     print(f'[DEBUG]\n\nPAURCE1111: {admin_page.get_attribute('outerHTML')} &&{admin_page}\n\n')
     #admin_page = wait.until(EC.visibility_of_element_located(locator))
-    overlay = driver.find_elements(By.CLASS_NAME, "oxd-loading-spinner")
+    wait.until(EC.presence_of_element_located((By.XPATH, "//h6[text()='Dashboard']")))
+    overlay = login_driver.find_elements(By.CLASS_NAME, "oxd-loading-spinner")
 
     if len(overlay) > 0:
         print("Overlay đang tồn tại")
