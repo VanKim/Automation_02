@@ -28,6 +28,8 @@ def driver():
     browser = os.getenv("BROWSER")
     if browser is None:
         browser = "Chrome"
+
+    print(f'\n[DEBUG] {headless_flag},,,,{browser}\n\n')
     # Open browser
     driver = None
     match browser:
@@ -44,7 +46,7 @@ def driver():
     base_url = os.getenv("BASE_URL")
     if base_url is None:
         base_url = ConfigReader.get_base_url()
-
+    print(f'\n[DEBUG] {base_url}\n\n')
     # Access base_url on browser
     driver.get(base_url)
     yield driver
