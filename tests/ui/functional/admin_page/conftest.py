@@ -17,11 +17,10 @@ def admin_page_driver(login_driver):
     login_driver.save_screenshot("report/debug.png")
     overlay = login_driver.find_elements(By.CLASS_NAME, "oxd-loading-spinner")
     if len(overlay) > 0:
-        print("Overlay đang tồn tại")
+        print("Overlay is existing")
         login_driver.execute_script("arguments[0].click();", admin_page)
     else:
-        print("Không có overlay")
+        print("Don't have overlay")
         admin_page = wait.until(EC.element_to_be_clickable(locator)).click()
     wait.until(EC.url_contains("/admin/viewSystemUsers"))
-    print(f'[DEBUG]\n\nCURRENT URL{login_driver.current_url}\n\n')
     return login_driver

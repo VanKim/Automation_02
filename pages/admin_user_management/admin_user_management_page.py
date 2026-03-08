@@ -117,11 +117,9 @@ class AdminPage(BasePage):
     # Navigation Header
     def get_navigation_list(self):
         print(f'[DEBUG]self: {self}////{self.driver}\n\n')
-        print(f'[DEBUG]self.__navigation_tab_list__: {self.__navigation_tab_list__}\n\n')
         nav_list = self.find_elements(self.__navigation_tab_list__)
         print(f'[DEBUG]nav_list method: {nav_list}\n\n')
         return nav_list
-        #return self.find_elements(self.__navigation_tab_list__)
 
     # Get webElement for a navigation tab
     def get_navigation_tab(self, nav_list, nav_name):
