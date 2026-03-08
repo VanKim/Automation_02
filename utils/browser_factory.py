@@ -1,4 +1,3 @@
-
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options as ChromeOptions
 from selenium.webdriver.firefox.options import Options as FirefoxOptions
@@ -10,15 +9,19 @@ import os
 def config_chrome_options(headless_flag):
     options = ChromeOptions()
     options.add_argument('--lang=en-US')
-    options.add_experimental_option(
-        "prefs", {"intl.accept_languages": "en,en_US"}
-    )
     if headless_flag:
         options.add_argument('--headless=new')
     else:
         options.add_argument('--start-maximized')
         options.add_argument('--disable-popup-blocking')
         options.add_argument('--disable-extensions')
+    options.add_experimental_option(
+        "prefs", {"intl.accept_languages": "en,en_US"}
+    )
+    options.set_capability(
+        "goog:loggingPrefs",
+        {"performance": "ALL"}
+    )
     return options
 
 def config_firefox_options(headless_flag):
@@ -41,6 +44,13 @@ def config_edge_options(headless_flag):
         options.add_argument('--start-maximized')
         options.add_argument('--disable-popup-blocking')
         options.add_argument('--disable-extensions')
+    options.add_experimental_option(
+        "prefs", {"intl.accept_languages": "en,en_US"}
+    )
+    options.set_capability(
+        "goog:loggingPrefs",
+        {"performance": "ALL"}
+    )
     return options
 
 def config_safari_options(headless_flag):
@@ -51,6 +61,9 @@ def config_safari_options(headless_flag):
 def open_chrome_browser(driver, headless_flag):
     options = config_chrome_options(headless_flag)
     driver = webdriver.Chrome(options=options)
+    # bật network tracking
+    driver.execute_cdp_cmd("Network.enable", {})
+
     return driver
 
 def open_firefox_browser(driver, headless_flag):
@@ -61,6 +74,7 @@ def open_firefox_browser(driver, headless_flag):
 def open_edge_browser(driver, headless_flag):
     options = config_edge_options(headless_flag)
     driver = webdriver.Edge(options=options)
+    driver.execute_cdp_cmd("Network.enable", {})
     return driver
 
 def open_safari_browser(driver, headless_flag):

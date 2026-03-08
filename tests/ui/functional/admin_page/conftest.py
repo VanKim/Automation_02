@@ -7,7 +7,7 @@ from selenium.webdriver.common.by import By
 def admin_page_driver(login_driver):
     wait = WebDriverWait(login_driver, 10)
     wait.until(EC.element_to_be_clickable(
-        (By.XPATH, "//span[normalize-space()='Admin']")
+        (By.XPATH, "//span[normalize-space(.)='Admin']")
     )).click()
     wait.until(EC.url_contains("/admin/viewSystemUsers"))
     return login_driver

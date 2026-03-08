@@ -1,0 +1,27 @@
+[
+
+
+  {
+  "username": "Admin",
+  "userRole": "Admin",
+  "employeeName": "",
+  "status": "Disabled",
+  "endpoint": "/api/v2/admin/users?limit=50&offset=0&username=Admin&userRoleId=1&status=0&sortField=u.userName&sortOrder=ASC"
+  },
+  {
+  "username": "Admin",
+  "userRole": "-- Select --",
+  "employeeName": "",
+  "status": "Enabled",
+  "endpoint": "/api/v2/admin/users?limit=50&offset=0&username=Admin&status=1&sortField=u.userName&sortOrder=ASC"
+  },
+  {
+      "username": "",
+      "userRole": "-- Select --",
+      "employeeName": "",
+      "status": "-- Select --",
+      "endpoint": "/api/v2/admin/users?limit=50&offset=0&sortField=u.userName&sortOrder=ASC"
+  }
+
+
+]

@@ -28,6 +28,7 @@ jobs:
     env:
       BROWSER: ${{ matrix.browser }}
       HEADLESS: true
+      NAME: ${{ matrix.suite }}_${{ matrix.browser }}
 
     steps:
     - name: Checkout source code from github
@@ -53,6 +54,16 @@ jobs:
             echo "BASE_URL=http://mock" >> $GITHUB_ENV
           fi
 
-    - name: Run Automation tests
+    - name: Create test report folder
+      run: mkdir -p report
+
+    - name: Run test
       run:
-        pytest ${{matrix.suite}} -s --maxfail=1 --disable-warnings
+        pytest -m ${{matrix.suite}} -s --html=report/report_${{env.NAME}}.html --self-contained-html --disable-warnings
+
+    - name: Upload test report
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: test-report-${env.NAME}}
+        path: report/*.html

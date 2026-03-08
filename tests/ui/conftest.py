@@ -1,7 +1,7 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 import pytest
-from seleniumwire import webdriver
+from selenium import webdriver
 from selenium.webdriver.support.wait import WebDriverWait
 
 from utils.config_reader import ConfigReader
@@ -39,9 +39,6 @@ def driver():
             driver = open_edge_browser(driver, headless_flag)
         case 'Safari':
             driver = open_safari_browser(driver, headless_flag)
-
-    # Get cookies
-
 
     # Receive BASE_URL from application_deploy.yml else get from testsetting.json
     base_url = os.getenv("BASE_URL")

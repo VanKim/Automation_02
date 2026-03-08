@@ -1,0 +1,62 @@
+[
+  {
+    "name": "User Management",
+    "option_list": {
+      "Users": "orangehrmlive.com/web/index.php/admin/viewSystemUsers"
+    }
+  },
+  {
+    "name": "Job",
+    "option_list": {
+      "Job Titles": "orangehrmlive.com/web/index.php/admin/viewJobTitleList",
+      "Pay Grades": "orangehrmlive.com/web/index.php/admin/viewPayGrades",
+      "Employment Status": "orangehrmlive.com/web/index.php/admin/employmentStatus",
+      "Job Categories": "orangehrmlive.com/web/index.php/admin/jobCategory",
+      "Work Shifts": "orangehrmlive.com/web/index.php/admin/workShift"
+    }
+  },
+  {
+    "name": "Organization",
+    "option_list": {
+      "General Information": "orangehrmlive.com/web/index.php/admin/viewOrganizationGeneralInformation",
+      "Structure": "orangehrmlive.com/web/index.php/admin/viewCompanyStructure",
+      "Locations": "orangehrmlive.com/web/index.php/admin/viewLocations"
+    }
+  },
+  {
+    "name": "Qualifications",
+    "option_list": {
+      "Skills": "orangehrmlive.com/web/index.php/admin/viewSkills",
+      "Education": "orangehrmlive.com/web/index.php/admin/viewEducation",
+      "Licenses": "orangehrmlive.com/web/index.php/admin/viewLicenses",
+      "Languages": "orangehrmlive.com/web/index.php/admin/viewLanguages",
+      "Memberships": "orangehrmlive.com/web/index.php/admin/membership"
+    }
+  },
+  {
+    "name": "Nationalities",
+    "option_list": {
+      "Nationalities": "orangehrmlive.com/web/index.php/admin/nationality"
+    }
+  },
+  {
+    "name": "Corporate Branding",
+    "option_list": {
+      "Corporate Branding": "orangehrmlive.com/web/index.php/admin/addTheme"
+    }
+
+  },
+  {
+    "name": "Configuration",
+    "option_list": {
+      "Email Configuration": "orangehrmlive.com/web/index.php/admin/listMailConfiguration",
+      "Email Subscriptions": "orangehrmlive.com/web/index.php/admin/viewEmailNotification",
+      "Language Packages": "orangehrmlive.com/web/index.php/admin/languagePackage",
+      "Modules": "orangehrmlive.com/web/index.php/admin/viewModules",
+      "Social Media Authentication": "orangehrmlive.com/web/index.php/admin/openIdProvider",
+      "Register OAuth Client": "orangehrmlive.com/web/index.php/admin/registerOAuthClient",
+      "LDAP Configuration": "orangehrmlive.com/web/index.php/admin/ldapConfiguration"
+    }
+  }
+
+]
