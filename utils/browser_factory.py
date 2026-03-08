@@ -15,9 +15,6 @@ def config_chrome_options(headless_flag):
         options.add_argument('--start-maximized')
         options.add_argument('--disable-popup-blocking')
         options.add_argument('--disable-extensions')
-    options.add_experimental_option(
-        "prefs", {"intl.accept_languages": "en,en_US"}
-    )
     options.set_capability(
         "goog:loggingPrefs",
         {"performance": "ALL"}
