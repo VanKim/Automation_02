@@ -13,7 +13,6 @@ def admin_page_driver(login_driver):
     print(f'[DEBUG]\n\nPAGE SOURCE: {login_driver.page_source}\n\n')
     print(f'[DEBUG]\n\nPAURCE: {admin_page.get_attribute('outerHTML')}\n\n')
     #admin_page = wait.until(EC.visibility_of_element_located(locator))
-    #print(f'[DEBUG]\n\nPAURCE2: {admin_page.get_attribute('outerHTML')}\n\n')
     #admin_page = wait.until(EC.element_to_be_clickable(locator))
     admin_page.click()
     wait.until(EC.url_contains("/admin/viewSystemUsers"))
