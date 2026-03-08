@@ -27,8 +27,6 @@ class BasePage:
             EC.presence_of_all_elements_located(locator))
         except TimeoutException:
             return self.driver.find_elements(*locator)
-        else:
-            return elements
 
     def send_keys(self, locator, value, clear, timeout=10):
         element = WebDriverWait(self.driver, timeout).until(
